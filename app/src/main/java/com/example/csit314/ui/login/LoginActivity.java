@@ -1,14 +1,10 @@
 package  com.example.csit314.ui.login;
 
 import android.app.Activity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,15 +14,79 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.csit314.R;
-import com.example.csit314.ui.login.LoginViewModel;
-import com.example.csit314.ui.login.LoginViewModelFactory;
 import com.example.csit314.databinding.ActivityLoginBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-private ActivityLoginBinding binding;
+    private ActivityLoginBinding binding;
+
+    private FirebaseAuth mAuth;
+
+    public void onCreate()
+    {
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    public FirebaseAuth getmAuth() {
+        return mAuth;
+    }
+
+    private void createAccount(String email, String password)
+    {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void signIn(String email, String password)
+    {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+        {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            //String welcome = getString(R.string.welcome);
+                            Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +178,11 @@ private ActivityLoginBinding binding;
                         passwordEditText.getText().toString());
             }
         });
+    }
+
+    public void logout() //firebase logout
+    {
+        //FirebaseAuth.getInstance().signOut();
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
