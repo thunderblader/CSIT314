@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSIT314">
         <activity
+            android:name=".useradminview.UserAdminAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".useradminview.UserAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".patientview.PatientActivity"
             android:exported="true" />
         <activity

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "79900329264",
+    "firebase_url": "https://csit314-43146-default-rtdb.firebaseio.com",
+    "project_id": "csit314-43146",
+    "storage_bucket": "csit314-43146.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79900329264:android:19fc162952185fc2a6f4f5",
+        "android_client_info": {
+          "package_name": "com.example.csit314"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79900329264-8vat7ncu45t9a92ld7r9c1v5015nkaqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXDN1A1mlCKYkabDB2KLElOaIqKs7x9tw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79900329264-8vat7ncu45t9a92ld7r9c1v5015nkaqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

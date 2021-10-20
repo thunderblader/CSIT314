@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.csit314.R;
 import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.patientview.PatientActivity;
+import com.example.csit314.useradminview.UserAdminActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         return mAuth;
     }
 
-    private void createAccount(String email, String password)
+    public void createAccount(String email, String password)
     {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
@@ -244,7 +245,8 @@ public class LoginActivity extends AppCompatActivity {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
-                launchPatientActivity(v);
+                //launchPatientActivity(v);
+                launchUserAdminActivity(v);
             }
         });
     }
@@ -252,6 +254,12 @@ public class LoginActivity extends AppCompatActivity {
     public void launchPatientActivity(View v) //launch to PatientActivity
     {
         Intent i = new Intent(this, PatientActivity.class);
+        startActivity(i);
+    }
+
+    public void launchUserAdminActivity(View v) //launch to PatientActivity
+    {
+        Intent i = new Intent(this, UserAdminActivity.class);
         startActivity(i);
     }
 
