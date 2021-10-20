@@ -12,4 +12,4 @@ class LoggedInUserView {
     }
 
     String getDisplayName() {return displayName;}
-}
+}//test comment

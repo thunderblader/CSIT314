@@ -1,10 +1,10 @@
 package  com.example.csit314.ui.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csit314.R;
 import com.example.csit314.databinding.ActivityLoginBinding;
+import com.example.csit314.patientview.PatientActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -233,6 +234,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) //when you clock the login button
             {
                 //this is hard coded for testing
@@ -242,8 +244,15 @@ public class LoginActivity extends AppCompatActivity {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
+                launchPatientActivity(v);
             }
         });
+    }
+
+    public void launchPatientActivity(View v) //launch to PatientActivity
+    {
+        Intent i = new Intent(this, PatientActivity.class);
+        startActivity(i);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
