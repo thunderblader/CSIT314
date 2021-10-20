@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.csit314.R;
 import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.patientview.PatientActivity;
+import com.example.csit314.prescribe.PrescriptionActivity;
 import com.example.csit314.useradminview.UserAdminActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
