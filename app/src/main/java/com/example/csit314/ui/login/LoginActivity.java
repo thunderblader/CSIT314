@@ -28,6 +28,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.StringTokenizer;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,13 +42,13 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
+    private ValueEventListener postListener;
+    private DataSnapshot dataSnapshot;
 
-    public void onCreate()
+    public FirebaseAuth getmAuth()
     {
-        mAuth = FirebaseAuth.getInstance();
-    }
-
-    public FirebaseAuth getmAuth() {
         return mAuth;
     }
 
@@ -75,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             //String welcome = getString(R.string.welcome);
                             Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
                         }
@@ -87,10 +93,65 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    public void logout() //firebase logout
+    {
+        mAuth.signOut();
+    }
+
+    //reading from database requires firebase user to not be null
+    private void writetoDatabase()
+    {
+        mDatabase.setValue("user1");
+    }
+
+    private String readfromDatabase()   //we need to read the database to get a snapshot of the data
+    {
+        String data = mDatabase.get().toString();
+        if (data != null)
+            return data;
+        else
+            return null;
+    }
+
+    private void createUser(String name)
+    {
+        logout();
+        //signIn("thunderblader@live.com", "123456");
+        mDatabase.setValue("user111");
+    }
+
+    private String[] readPrecription(String name)    //name -> data (date,drug,drug,drug...)
+    {
+        //StringTokenizer token = new StringTokenizer("", ",");
+        if(dataSnapshot.child(name).getChildrenCount() == 0)
+            return null;
+        int i = 0;
+        String[] theData = new String[(int)dataSnapshot.child(name).getChildrenCount()];
+        mDatabase.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                for (DataSnapshot dataSnap : dataSnapshot.getChildren())
+                {
+                    String thisData = dataSnap.getValue(String.class);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+        return theData;
+    }
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
      binding = ActivityLoginBinding.inflate(getLayoutInflater());
      setContentView(binding.getRoot());
@@ -172,17 +233,17 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+            public void onClick(View v) //when you clock the login button
+            {
+                //this is hard coded for testing
+                createUser("user1");
+
+                //below is what is supposed to happen after you login, but do not end the program or move it to another page until firebase has logged in
+                //loadingProgressBar.setVisibility(View.VISIBLE);
+                //loginViewModel.login(usernameEditText.getText().toString(),
+                //        passwordEditText.getText().toString());
             }
         });
-    }
-
-    public void logout() //firebase logout
-    {
-        //FirebaseAuth.getInstance().signOut();
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
