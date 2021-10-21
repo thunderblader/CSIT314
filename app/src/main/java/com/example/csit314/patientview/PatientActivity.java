@@ -2,7 +2,9 @@ package com.example.csit314.patientview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csit314.R;
 import com.example.csit314.databinding.ActivityLoginBinding;
+import com.example.csit314.email.SendMail;
 import com.example.csit314.patientview.PatientActivity;
 import com.example.csit314.prescribe.PrescriptionActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,5 +64,14 @@ public class PatientActivity extends AppCompatActivity {
         Intent intent = new Intent(this,PrescriptionActivity.class);
         intent.putExtra("Two", page);// One is your argument
         startActivity(intent);
+    }
+
+    public void emailOnClick(View view) {
+        String mEmail = "khoowh1996@gmail.com";
+        String mSubject = "test new email dev314sim@";
+        String mMessage = "Test Message";
+
+        SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage);
+        sendMail.execute();
     }
 }

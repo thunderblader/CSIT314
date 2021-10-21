@@ -246,8 +246,8 @@ public class LoginActivity extends AppCompatActivity {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
-                //launchPatientActivity(v);
-                launchUserAdminActivity(v);
+                launchPatientActivity(v);
+                //launchUserAdminActivity(v);
             }
         });
     }
