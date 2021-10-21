@@ -55,10 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         return mAuth;
     }
 
-    public String getUID()
-    {
-        return mAuth.getUid();
-    }
+    public String getUID() { return mAuth.getUid(); }
 
     public void createAccount(String email, String password)
     {
