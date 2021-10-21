@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
     private ValueEventListener postListener;
     private DataSnapshot dataSnapshot;
 
+    public boolean loggedIn = false;
+
     public FirebaseAuth getmAuth()
     {
         return mAuth;
@@ -68,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            loggedIn=true;
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
@@ -89,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //String welcome = getString(R.string.welcome);
                             Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
+                            loggedIn=true;
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
