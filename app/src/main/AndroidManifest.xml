@@ -16,6 +16,11 @@
             android:name=".useradminview.UserAdminActivity"
             android:exported="false" />
         <activity
+            android:name=".prescribe.PrescriptionActivity"
+            android:exported="true"
+            android:label="@string/title_activity_prescription"
+            android:theme="@style/Theme.CSIT314.NoActionBar" />
+        <activity
             android:name=".patientview.PatientActivity"
             android:exported="true" />
         <activity
