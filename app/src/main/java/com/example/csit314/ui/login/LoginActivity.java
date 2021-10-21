@@ -54,6 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         return mAuth;
     }
 
+    public String getUID()
+    {
+        return mAuth.getUid();
+    }
+
     public void createAccount(String email, String password)
     {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -118,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
     private void createUser(String name)
     {
         logout();
-        //signIn("thunderblader@live.com", "123456");
+        signIn("thunderblader@live.com", "123456");
         mDatabase.setValue("user111");
     }
 
@@ -240,13 +245,12 @@ public class LoginActivity extends AppCompatActivity {
             {
                 //this is hard coded for testing
                 createUser("user1");
-
                 //below is what is supposed to happen after you login, but do not end the program or move it to another page until firebase has logged in
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
                 //launchPatientActivity(v);
-                launchUserAdminActivity(v);
+                //launchUserAdminActivity(v);
             }
         });
     }
