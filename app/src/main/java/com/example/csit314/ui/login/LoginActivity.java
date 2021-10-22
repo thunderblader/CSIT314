@@ -37,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.StringTokenizer;
 
 public class LoginActivity extends AppCompatActivity {
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
     private void createUser(String name)
     {
         logout();
-        signIn("thunderblader@live.com", "123456");
+        createAccount("thisEmail@gmail.com", "123456");
         mDatabase.setValue("user111");
     }
 
@@ -252,7 +253,7 @@ public class LoginActivity extends AppCompatActivity {
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
                 //launchPatientActivity(v);
-                launchUserAdminActivity(v);
+                //launchUserAdminActivity(v);
             }
         });
     }

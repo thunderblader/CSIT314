@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.csit314.R;
+import com.example.csit314.data.Firebase;
 import com.example.csit314.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class UserAdminRegisterActivity extends AppCompatActivity {
 
     LoginActivity loginActivity;
+
+    Firebase firebase;
 
     private EditText TextEmail;
     private EditText TextPassword;
@@ -57,8 +60,8 @@ public class UserAdminRegisterActivity extends AppCompatActivity {
                     Toast.makeText(UserAdminRegisterActivity.this, "password too short", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    //loginActivity.createAccount(txt_Email, txt_Email);
-                    registerUser(txt_Email, txt_Password);
+                    loginActivity.createAccount(txt_Email, txt_Email);
+                    //registerUser(txt_Email, txt_Password);
                 }
             }
         });
