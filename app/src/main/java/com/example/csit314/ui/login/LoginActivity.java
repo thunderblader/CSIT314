@@ -252,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
                 //launchPatientActivity(v);
-                //launchUserAdminActivity(v);
+                launchUserAdminActivity(v);
             }
         });
     }

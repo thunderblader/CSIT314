@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.csit314.R;
 import com.example.csit314.ui.login.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,7 +29,6 @@ public class UserAdminAddActivity extends AppCompatActivity {
     private Button addButton;
     private Button backButton;
 
-    FirebaseDatabase rootNode;
     DatabaseReference reference;
 
     String txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup;
@@ -63,14 +63,12 @@ public class UserAdminAddActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    loginActivity.createAccount(txt_Email, txt_Password);
-
-                    rootNode = FirebaseDatabase.getInstance();
-                    //reference = rootNode.getReference("");
+                    reference = FirebaseDatabase.getInstance().getReference();
 
                     UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
 
-                    reference.child(txt_UserGroup).child(txt_Email).setValue(userAdminAddHelper);
+                    String uid = loginActivity.getUID();
+                    reference.child(txt_UserGroup).setValue(userAdminAddHelper);
                 }
             }
         });
