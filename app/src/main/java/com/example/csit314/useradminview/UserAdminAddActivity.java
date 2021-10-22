@@ -68,7 +68,7 @@ public class UserAdminAddActivity extends AppCompatActivity {
                     UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
 
                     String uid = loginActivity.getUID();
-                    reference.child(txt_UserGroup).child(uid).setValue(userAdminAddHelper);
+                    reference.child(txt_UserGroup).setValue(userAdminAddHelper);
                 }
             }
         });
