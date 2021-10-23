@@ -21,9 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserAdminRegisterActivity extends AppCompatActivity {
 
-    LoginActivity loginActivity;
-
-    Firebase firebase;
+    Firebase firebase = new Firebase();
 
     private EditText TextEmail;
     private EditText TextPassword;
@@ -60,8 +58,7 @@ public class UserAdminRegisterActivity extends AppCompatActivity {
                     Toast.makeText(UserAdminRegisterActivity.this, "password too short", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    loginActivity.createAccount(txt_Email, txt_Email);
-                    //registerUser(txt_Email, txt_Password);
+                    registerUser(txt_Email, txt_Password);
                 }
             }
         });
