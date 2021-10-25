@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserAdminRegisterActivity extends AppCompatActivity {
 
-    Firebase firebase = new Firebase();
+    Firebase firebase = new Firebase(this);
 
     private EditText TextEmail;
     private EditText TextPassword;
