@@ -23,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserAdminAddActivity extends AppCompatActivity {
 
-    Firebase firebase = new Firebase();
+    //Firebase firebase = new Firebase();
+
+
 
     private EditText TextName;
     private EditText TextEmail;
@@ -99,15 +101,13 @@ public class UserAdminAddActivity extends AppCompatActivity {
                     TextUserGroup.requestFocus();
                     return;
                 }
-
-<<<<<<< HEAD
                 else{
+                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
                     //registerUser(txt_Email, txt_Password);
-                    firebase.createAccount(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
-=======
+                    //firebase.createAccount(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
+
                     //String uid = loginActivity.getUID();
                     reference.child(txt_UserGroup).setValue(userAdminAddHelper);
->>>>>>> 4e3084cd5eb96760738c349c8f16361781b7f5a6
                 }
             }
         });
@@ -127,8 +127,8 @@ public class UserAdminAddActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(UserAdminAddActivity.this, "User create Successful", Toast.LENGTH_SHORT).show();
-                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
                     reference = FirebaseDatabase.getInstance().getReference();
+                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
 
                     reference.child(txt_UserGroup).child(auth.getCurrentUser().getUid()).setValue(userAdminAddHelper);
                 }
