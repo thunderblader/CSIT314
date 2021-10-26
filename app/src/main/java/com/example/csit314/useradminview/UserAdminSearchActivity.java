@@ -1,78 +1,106 @@
 package com.example.csit314.useradminview;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.csit314.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class UserAdminSearchActivity extends AppCompatActivity {
 
-    private EditText EditUID;
-    private TextView TextName;
+    private EditText SearchUID;
+    private EditText SearchUserGrp;
+    private EditText TextName;
+    private EditText TextNumber;
+    private EditText TextUserGroup;
 
-    private Button searchButton;
+    private Button SearchSearchButtonUID;
+    private Button SearchSearchButtonUserGrp;
     private Button backButton;
+    private Button updateButton;
 
-    DatabaseReference reference;
-
-    String UID_Name;
+    String UID_Name, UserGrp_Name;
+    String txt_Name, txt_Number, txt_UserGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_admin_search);
 
-        EditUID = findViewById(R.id.AddSearchText);
+        SearchUID = findViewById(R.id.AddSearchTextUID);
+        SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
         TextName = findViewById(R.id.textViewUserAdminSearchName);
+        TextNumber = findViewById(R.id.textViewUserAdminSearchNumber);
+        TextUserGroup = findViewById(R.id.textViewUserAdminSearchUserGrp);
 
-        searchButton = findViewById(R.id.SearchSearchButton);
+        SearchSearchButtonUID = findViewById(R.id.SearchSearchButtonUID);
+        SearchSearchButtonUserGrp = findViewById(R.id.SearchSearchButtonUserGrp);
         backButton = findViewById(R.id.SearchBackButton);
+        updateButton = findViewById(R.id.SearchUpdateButton);
 
-        reference = FirebaseDatabase.getInstance().getReference();
-
-        searchButton.setOnClickListener((new View.OnClickListener() {
+        SearchSearchButtonUID.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UID_Name = EditUID.getText().toString();
+                UID_Name = SearchUID.getText().toString();
 
                 if(UID_Name.isEmpty()){
-                    EditUID.setError("UID is required");
-                    EditUID.requestFocus();
+                    SearchUID.setError("UID is required");
+                    SearchUID.requestFocus();
                     return;
                 }
 
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot ds : snapshot.getChildren()){
-                            if(ds.child("txt_UserGroup").getValue().equals(UID_Name)){
-                                TextName.setText("found");
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                TextName.setText("found");
             }
         }));
+
+        SearchSearchButtonUserGrp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserGrp_Name = SearchUserGrp.getText().toString();
+
+                if(UserGrp_Name.isEmpty()){
+                    SearchUID.setError("User Group is required");
+                    SearchUID.requestFocus();
+                    return;
+                }
+
+                TextNumber.setText("found");
+                TextUserGroup.setText("found");
+            }
+        });
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txt_Name = TextName.getText().toString();
+                txt_Number = TextNumber.getText().toString();
+                txt_UserGroup = TextUserGroup.getText().toString();
+
+                if(txt_Name.isEmpty()){
+                    TextName.setError("Name is required");
+                    TextName.requestFocus();
+                    return;
+                }
+                if(txt_Number.isEmpty()){
+                    TextNumber.setError("Number is required");
+                    TextNumber.requestFocus();
+                    return;
+                }
+                if(txt_UserGroup.isEmpty()){
+                    TextUserGroup.setError("User group is required");
+                    TextUserGroup.requestFocus();
+                    return;
+                }
+                else{
+
+                }
+            }
+        });
 
         backButton.setOnClickListener((new View.OnClickListener() {
             @Override

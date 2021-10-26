@@ -18,132 +18,55 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/AddSearchText"
+        android:id="@+id/AddSearchTextUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="528dp"
+        android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="UID"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUserGrp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewSearchUserID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="56dp"
         android:text="Enter UID"
-        app:layout_constraintBottom_toTopOf="@+id/AddSearchText"
+        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUID"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/SearchBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="16dp"
         android:text="back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/SearchSearchButton"
+        android:id="@+id/SearchSearchButtonUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="528dp"
+        android:layout_marginBottom="37dp"
         android:text="search"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/SearchSearchButtonUserGrp"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchName"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="29dp"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewUserAdminSearchNameText" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchEmail"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="29dp"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchPass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toEndOf="@+id/textViewUserAdminSearchNameText" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchPass"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="31dp"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toEndOf="@+id/textViewUserAdminSearchNameText" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchNumber"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="19dp"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchUserGrp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toEndOf="@+id/textViewUserAdminSearchNameText" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchUserGrp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/SearchBackButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toEndOf="@+id/textViewUserAdminSearchNameText" />
 
     <TextView
         android:id="@+id/textViewUserAdminSearchNameText"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="30dp"
         android:autoSizeTextType="uniform"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchEmailText"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchEmailText"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="29dp"
-        android:autoSizeTextType="uniform"
-        android:text="Email"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchPassText"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewUserAdminSearchPassText"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="31dp"
-        android:autoSizeTextType="uniform"
-        android:text="Pass"
+        android:text="Name:"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchNumberText"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -154,7 +77,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="30dp"
         android:autoSizeTextType="uniform"
-        android:text="No."
+        android:text="No.:"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchUserGrpText"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -165,8 +88,89 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="101dp"
         android:autoSizeTextType="uniform"
-        android:text="User"
+        android:text="User:"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/textViewUserAdminSearchName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="30dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/textViewUserAdminSearchNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchUserGrp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/textViewUserAdminSearchUserGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="105dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/SearchUpdateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="16dp"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/AddSearchTextUserGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="137dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="User Group"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/SearchSearchButtonUserGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="132dp"
+        android:text="Search"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchName"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSearchUserGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:text="Enter User Group"
+        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUserGrp"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
