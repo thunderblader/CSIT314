@@ -13,9 +13,6 @@
             android:name=".useradminview.UserAdminSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".useradminview.UserAdminRegisterActivity"
-            android:exported="false" />
-        <activity
             android:name=".useradminview.UserAdminAddActivity"
             android:exported="false" />
         <activity

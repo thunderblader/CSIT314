@@ -2,9 +2,12 @@ package com.example.csit314.data;
 
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.csit314.useradminview.UserAdminAddActivity;
+import com.example.csit314.useradminview.UserAdminAddHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -90,7 +93,7 @@ public class Firebase {
             firebase_ready = true;
     }
 
-    public void createAccount(String email, String password, String number, String name, String user_group)
+    public void createAccount(String name, String email, String password, String number, String user_group)
     {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activityReference, new OnCompleteListener<AuthResult>()
                 {

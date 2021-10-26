@@ -23,9 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserAdminAddActivity extends AppCompatActivity {
 
-    //Firebase firebase = new Firebase();
-
-
+    Firebase firebase = new Firebase(UserAdminAddActivity.this);
 
     private EditText TextName;
     private EditText TextEmail;
@@ -102,12 +100,7 @@ public class UserAdminAddActivity extends AppCompatActivity {
                     return;
                 }
                 else{
-                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
-                    //registerUser(txt_Email, txt_Password);
-                    //firebase.createAccount(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
-
-                    //String uid = loginActivity.getUID();
-                    reference.child(txt_UserGroup).setValue(userAdminAddHelper);
+                    firebase.createAccount(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
                 }
             }
         });
