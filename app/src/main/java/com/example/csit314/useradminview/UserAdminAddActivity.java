@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
-import com.example.csit314.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserAdminAddActivity extends AppCompatActivity {
 
-    //Firebase firebase = new Firebase();
+    Firebase firebase = new Firebase();
 
     private EditText TextName;
     private EditText TextEmail;
@@ -101,8 +100,14 @@ public class UserAdminAddActivity extends AppCompatActivity {
                     return;
                 }
 
+<<<<<<< HEAD
                 else{
-                    registerUser(txt_Email, txt_Password);
+                    //registerUser(txt_Email, txt_Password);
+                    firebase.createAccount(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
+=======
+                    //String uid = loginActivity.getUID();
+                    reference.child(txt_UserGroup).setValue(userAdminAddHelper);
+>>>>>>> 4e3084cd5eb96760738c349c8f16361781b7f5a6
                 }
             }
         });
