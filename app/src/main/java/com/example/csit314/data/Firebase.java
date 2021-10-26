@@ -36,12 +36,12 @@ public class Firebase {
     private String the_number;
     private String the_userType;
 
-    public boolean signed_in = false;
-    public boolean firebase_ready = false;
+    private boolean signed_in = false;
+    private boolean firebase_ready = false;
 
-    CountDownTimer firebase_timer;
+    private CountDownTimer firebase_timer;
 
-    private Activity activityReference = new Activity();
+    private Activity activityReference;
 
     public FirebaseUser getCurrent_User() { return current_User; }
     public FirebaseAuth getmAuth() { return mAuth; }
@@ -128,7 +128,7 @@ public class Firebase {
     private void complete_signin()
     {
         signed_in = true;
-        user_ref = mDatabase.child(getUID());
+        user_ref = mDatabase.child("User_Group").child(getUID());
         current_User = mAuth.getCurrentUser();
     }
 
