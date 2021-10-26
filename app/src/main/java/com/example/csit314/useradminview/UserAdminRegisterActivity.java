@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
-import com.example.csit314.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserAdminRegisterActivity extends AppCompatActivity {
 
-    Firebase firebase = new Firebase();
+    Firebase firebase;
 
     private EditText TextEmail;
     private EditText TextPassword;
