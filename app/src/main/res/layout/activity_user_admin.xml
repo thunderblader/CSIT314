@@ -10,8 +10,8 @@
         android:id="@+id/UserAdminAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="260dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginEnd="268dp"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,9 +21,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="260dp"
+        android:layout_marginEnd="268dp"
         android:text="register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UserAdminAddButton" />
+
+    <TextView
+        android:id="@+id/textViewUserAdminWelcome"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="4dp"
+        android:autoSizeTextType="uniform"
+        android:text="Welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/UserAdminSearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="281dp"
+        android:text="search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserAdminRegisterButton" />
+
+    <TextView
+        android:id="@+id/textViewUserAdminName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserAdminWelcome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csit314.R;
+import com.example.csit314.data.Firebase;
 import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.patientview.PatientActivity;
 import com.example.csit314.prescribe.PrescriptionActivity;
@@ -37,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.StringTokenizer;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,123 +46,24 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
 
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference mDatabase;
-    private ValueEventListener postListener;
-    private DataSnapshot dataSnapshot;
+    private Firebase firebase_object = new Firebase(this);
 
-    public boolean loggedIn = false;
-
-    public FirebaseAuth getmAuth()
-    {
-        return mAuth;
-    }
-
-    public String getUID() { return mAuth.getUid(); }
-
-    public void createAccount(String email, String password)
-    {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        if (task.isSuccessful())
-                        {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            loggedIn=true;
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private void signIn(String email, String password)
-    {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
-        {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        if (task.isSuccessful())
-                        {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //String welcome = getString(R.string.welcome);
-                            Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
-                            loggedIn=true;
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    public void logout() //firebase logout
-    {
-        mAuth.signOut();
-    }
-
-    //reading from database requires firebase user to not be null
-    private void writetoDatabase()
-    {
-        mDatabase.setValue("user1");
-    }
-
-    private String readfromDatabase()   //we need to read the database to get a snapshot of the data
-    {
-        String data = mDatabase.get().toString();
-        if (data != null)
-            return data;
-        else
-            return null;
-    }
-
-    private void createUser(String name)
-    {
-        logout();
-        signIn("thunderblader@live.com", "123456");
-        mDatabase.setValue("user111");
-    }
-
-    private String[] readPrecription(String name)    //name -> data (date,drug,drug,drug...)
-    {
-        //StringTokenizer token = new StringTokenizer("", ",");
-        if(dataSnapshot.child(name).getChildrenCount() == 0)
-            return null;
-        int i = 0;
-        String[] theData = new String[(int)dataSnapshot.child(name).getChildrenCount()];
-        mDatabase.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                for (DataSnapshot dataSnap : dataSnapshot.getChildren())
-                {
-                    String thisData = dataSnap.getValue(String.class);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-        return theData;
-    }
-
-
-
-
-    @Override
+        @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String temp;
+
+            //firebase_object.signout();
+            firebase_object.signIn("theemail12345678@gmail.com", "123456");
+            //firebase_object.createAccount("theemail1@gmail.com", "123456", "111", "222","333");
+            //temp = firebase_object.getThe_number();
+            /*temp = firebase_object.getThe_userType();
+            temp = firebase_object.getThe_name();
+            firebase_object.signout();
+            firebase_object.signIn("thunderblader@live.com", "123456");
+            temp = firebase_object.getUID();*/
+            //firebase_object.getDatabase();
 
      binding = ActivityLoginBinding.inflate(getLayoutInflater());
      setContentView(binding.getRoot());
@@ -246,7 +149,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) //when you clock the login button
             {
                 //this is hard coded for testing
-                createUser("user1");
                 //below is what is supposed to happen after you login, but do not end the program or move it to another page until firebase has logged in
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
@@ -263,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void launchUserAdminActivity(View v) //launch to PatientActivity
+    public void launchUserAdminActivity(View v) //launch to UserAdminActivity
     {
         Intent i = new Intent(this, UserAdminActivity.class);
         startActivity(i);
