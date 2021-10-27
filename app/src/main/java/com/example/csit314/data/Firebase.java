@@ -6,6 +6,7 @@ import android.renderscript.Sampler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.csit314.useradminview.UserAdminAddActivity;
 import com.example.csit314.useradminview.UserAdminAddHelper;
@@ -20,8 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executor;
@@ -48,6 +53,8 @@ public class Firebase {
     private CountDownTimer firebase_timer;
 
     private Activity activityReference;
+
+    private Map<String, String> the_map;
 
     //public FirebaseUser getCurrent_User() { return current_User; }
     //public FirebaseAuth getmAuth() { return mAuth; }
@@ -156,6 +163,7 @@ public class Firebase {
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 dataSnapshotReference = dataSnapshot;
+                the_map = (Map) dataSnapshot.child("User_Group").child(getUID()).getValue();
                 fetchData();
                 database_ready = true;
             }
@@ -168,32 +176,27 @@ public class Firebase {
 
     private void fetchData()
     {
-        if(dataSnapshotReference.child("User_Group").child(getUID()).child("user_type").getValue(String.class).equals("admin"))
-        {
-            the_number = dataSnapshotReference.child("User_Group").child(getUID()).child("number").getValue().toString();
-            the_name = dataSnapshotReference.child("User_Group").child(getUID()).child("name").getValue().toString();
-            the_userType = dataSnapshotReference.child("User_Group").child(getUID()).child("user_type").getValue().toString();
-        }
-        else
-        {
-            dataSnapshotReference = dataSnapshotReference.child("User_Group").child(getUID());
-            the_number = dataSnapshotReference.child("number").getValue().toString();
-            the_name = dataSnapshotReference.child("name").getValue().toString();
-            the_userType = dataSnapshotReference.child("user_type").getValue().toString();
-        }
+        the_number = dataSnapshotReference.child("User_Group").child(getUID()).child("number").getValue().toString();
+        the_name = dataSnapshotReference.child("User_Group").child(getUID()).child("name").getValue().toString();
+        the_userType = dataSnapshotReference.child("User_Group").child(getUID()).child("user_type").getValue().toString();
     }
 
-    public void get_pastprescription()
+    public Map<String, String> get_pastprescription(String user_id)
     {
-        //if(dataSnapshot.child("prescription").getChildrenCount() == 0)
-        //    return "You have no past prescription";
-        //for (dataSnapshotReference.child("prescription") : dataSnapshot.getChildren())
-        {
-            //String thisData = dataSnap.getValue(String.class);
-        }
+        //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(user_id).child("prescription").getValue();
+        Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(getUID()).getValue();
+        return my_prescription;
     }
 
-
+    public String generateRandomstring(int length)
+    {
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random generator = new Random();
+        StringBuilder randomString = new StringBuilder();
+        for (int i = 0; i < length; i++)
+            randomString.append(chars.charAt(generator.nextInt(chars.length())));
+        return randomString.toString();
+    }
 
     //============================================================================
     //below this line is for testing purposes ONLY
@@ -211,13 +214,6 @@ public class Firebase {
             return data;
         else
             return null;
-    }
-
-    private void createUser(String name)
-    {
-        //logout();
-        //createAccount("thisEmail@gmail.com", "123456");
-        mDatabase.setValue("user111");
     }
 
     private String searchUser(String email)
@@ -248,17 +244,5 @@ public class Firebase {
         return theData;
     }
 
-    private String generateRandomstring()
-    {
-        Random generator = new Random();
-        StringBuilder randomString = new StringBuilder();
-        char tempChar;
-        for (int i = 0; i < 16; i++)
-        {
-            tempChar = (char)(generator.nextInt(96) + 32);
-            randomString.append(tempChar);
-        }
-        return randomString.toString();
-        //String str = new Random().
-    }
+
 }
