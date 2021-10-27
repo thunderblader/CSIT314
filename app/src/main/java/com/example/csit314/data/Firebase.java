@@ -2,6 +2,7 @@ package com.example.csit314.data;
 
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.renderscript.Sampler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executor;
 
@@ -31,6 +35,7 @@ public class Firebase {
     private DatabaseReference user_ref;
     private ValueEventListener postListener;
     private DataSnapshot dataSnapshot;
+    private DataSnapshot dataSnapshotReference;
 
     private String the_name;
     private String the_number;
@@ -38,20 +43,23 @@ public class Firebase {
 
     private boolean signed_in = false;
     private boolean firebase_ready = false;
+    private boolean database_ready = false;
 
     private CountDownTimer firebase_timer;
 
     private Activity activityReference;
 
-    public FirebaseUser getCurrent_User() { return current_User; }
-    public FirebaseAuth getmAuth() { return mAuth; }
-    public FirebaseDatabase getDatabase() { return database; }
+    //public FirebaseUser getCurrent_User() { return current_User; }
+    //public FirebaseAuth getmAuth() { return mAuth; }
+    //public FirebaseDatabase getDatabase() { return database; }
+
+    public DatabaseReference getDatabase_ref() { return user_ref; }
 
     public String getUID() { return mAuth.getUid(); }
-
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
     public String getThe_userType() { return the_userType; }
+    public String getThe_userData(String data_name) { return dataSnapshotReference.child("User_Group").child(getUID()).child(data_name).getValue().toString(); }
 
     public Firebase(Activity currentActivity)
     {
@@ -69,7 +77,7 @@ public class Firebase {
             @Override
             public void onFinish()
             {
-                if(!firebase_ready)
+                if(!firebase_ready) //when firebase has finished initialising
                     run_firebase();
             }
         };
@@ -79,21 +87,25 @@ public class Firebase {
     private void run_firebase()
     {
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        if(mAuth.getCurrentUser() != null)
+        if(mAuth != null && mDatabase != null)
         {
-            complete_signin();
-            fetchData();
-        }
-        if(mAuth == null || database == null || mDatabase == null || user_ref == null)
-            start_firebase();
-        else
+            //if(mAuth.getCurrentUser() != null)  //incase the user is still signed in
+            //    complete_signin();
             firebase_ready = true;
+        }
+        if(!firebase_ready)
+            start_firebase();
     }
 
-    public void createAccount(String name, String email, String password, String number, String user_group)
+    private void complete_signin()
+    {
+        signed_in = true;
+        user_ref = mDatabase.child("User_Group").child(getUID());
+        current_User = mAuth.getCurrentUser();
+    }
+
+    public void createAccount(String email, String password, String name, String number, String user_type)
     {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activityReference, new OnCompleteListener<AuthResult>()
                 {
@@ -103,7 +115,8 @@ public class Firebase {
                         if (task.isSuccessful())
                         {
                             complete_signin();
-                            setData(number, name, user_group);
+                            setData(number, name, user_type);
+                            fetch_database(mDatabase);
                         }
                     }
                 });
@@ -119,40 +132,72 @@ public class Firebase {
                     if (task.isSuccessful())
                     {
                         complete_signin();
-                        fetchData();
+                        fetch_database(mDatabase);
                     }
                 }
             });
     }
 
-    private void complete_signin()
-    {
-        signed_in = true;
-        user_ref = mDatabase.child("User_Group").child(getUID());
-        current_User = mAuth.getCurrentUser();
-    }
+    public void signout() { mAuth.signOut(); }
 
-    private void setData(String number, String name, String user_group)
+    private void setData(String number, String name, String user_type)
     {
-        the_number = number;
-        the_name = name;
-        the_userType = user_group;
+        user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
-        user_ref.child("user_group").setValue(user_group);
+        user_ref.child("user_type").setValue(user_type);
+    }
+
+    private void fetch_database(DatabaseReference the_reference)
+    {
+        ValueEventListener postListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                dataSnapshotReference = dataSnapshot;
+                fetchData();
+                database_ready = true;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        };
+        the_reference.addValueEventListener(postListener);
     }
 
     private void fetchData()
     {
-        the_number = user_ref.child("number").get().toString();
-        the_name = user_ref.child("name").get().toString();
-        the_userType = user_ref.child("user_group").get().toString();
+        if(dataSnapshotReference.child("User_Group").child(getUID()).child("user_type").getValue(String.class).equals("admin"))
+        {
+            the_number = dataSnapshotReference.child("User_Group").child(getUID()).child("number").getValue().toString();
+            the_name = dataSnapshotReference.child("User_Group").child(getUID()).child("name").getValue().toString();
+            the_userType = dataSnapshotReference.child("User_Group").child(getUID()).child("user_type").getValue().toString();
+        }
+        else
+        {
+            dataSnapshotReference = dataSnapshotReference.child("User_Group").child(getUID());
+            the_number = dataSnapshotReference.child("number").getValue().toString();
+            the_name = dataSnapshotReference.child("name").getValue().toString();
+            the_userType = dataSnapshotReference.child("user_type").getValue().toString();
+        }
     }
 
-    public void signout() { mAuth.signOut(); }
+    public void get_pastprescription()
+    {
+        //if(dataSnapshot.child("prescription").getChildrenCount() == 0)
+        //    return "You have no past prescription";
+        //for (dataSnapshotReference.child("prescription") : dataSnapshot.getChildren())
+        {
+            //String thisData = dataSnap.getValue(String.class);
+        }
+    }
+
+
 
     //============================================================================
     //below this line is for testing purposes ONLY
+
     //reading from database requires firebase user to not be null
     private void writetoDatabase()
     {

@@ -55,14 +55,15 @@ public class LoginActivity extends AppCompatActivity {
         String temp;
 
             //firebase_object.signout();
-            firebase_object.createAccount("theemail123456789@gmail.com", "123456", "111", "222","333");
-            temp = firebase_object.getThe_number();
-            temp = firebase_object.getThe_userType();
+            firebase_object.signIn("theemail12345678@gmail.com", "123456");
+            //firebase_object.createAccount("theemail1@gmail.com", "123456", "111", "222","333");
+            //temp = firebase_object.getThe_number();
+            /*temp = firebase_object.getThe_userType();
             temp = firebase_object.getThe_name();
             firebase_object.signout();
             firebase_object.signIn("thunderblader@live.com", "123456");
-            temp = firebase_object.getUID();
-            firebase_object.getDatabase();
+            temp = firebase_object.getUID();*/
+            //firebase_object.getDatabase();
 
      binding = ActivityLoginBinding.inflate(getLayoutInflater());
      setContentView(binding.getRoot());
