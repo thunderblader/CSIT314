@@ -37,7 +37,7 @@ public class UserAdminAddActivity extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseAuth auth;
 
-    String txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup;
+    String Name, Email, Password, Number, UserGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,49 +58,49 @@ public class UserAdminAddActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txt_Name = TextName.getText().toString();
-                txt_Email = TextEmail.getText().toString();
-                txt_Password = TextPassword.getText().toString();
-                txt_Number = TextNumber.getText().toString();
-                txt_UserGroup = TextUserGroup.getText().toString();
+                Name = TextName.getText().toString();
+                Email = TextEmail.getText().toString();
+                Password = TextPassword.getText().toString();
+                Number = TextNumber.getText().toString();
+                UserGroup = TextUserGroup.getText().toString();
 
-                if(txt_Name.isEmpty()){
+                if(Name.isEmpty()){
                     TextName.setError("Name is required");
                     TextName.requestFocus();
                     return;
                 }
-                if(txt_Email.isEmpty()){
+                if(Email.isEmpty()){
                     TextEmail.setError("Email is required");
                     TextEmail.requestFocus();
                     return;
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(txt_Email).matches()){
+                if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
                     TextEmail.setError("Please enter a valid email");
                     TextEmail.requestFocus();
                     return;
                 }
-                if(txt_Password.isEmpty()){
+                if(Password.isEmpty()){
                     TextPassword.setError("Password is required");
                     TextPassword.requestFocus();
                     return;
                 }
-                if(txt_Password.length()<6){
+                if(Password.length()<6){
                     TextPassword.setError("Please enter > 6 characters");
                     TextPassword.requestFocus();
                     return;
                 }
-                if(txt_Number.isEmpty()){
+                if(Number.isEmpty()){
                     TextNumber.setError("Number is required");
                     TextNumber.requestFocus();
                     return;
                 }
-                if(txt_UserGroup.isEmpty()){
+                if(UserGroup.isEmpty()){
                     TextUserGroup.setError("User group is required");
                     TextUserGroup.requestFocus();
                     return;
                 }
                 else{
-                    firebase.createAccount(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
+                    firebase.createAccount(Name, Email, Password, Number, UserGroup);
                 }
             }
         });
@@ -121,9 +121,9 @@ public class UserAdminAddActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(UserAdminAddActivity.this, "User create Successful", Toast.LENGTH_SHORT).show();
                     reference = FirebaseDatabase.getInstance().getReference();
-                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(txt_Name, txt_Email, txt_Password, txt_Number, txt_UserGroup);
+                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(Name, Email, Password, Number, UserGroup);
 
-                    reference.child(txt_UserGroup).child(auth.getCurrentUser().getUid()).setValue(userAdminAddHelper);
+                    reference.child(UserGroup).child(auth.getCurrentUser().getUid()).setValue(userAdminAddHelper);
                 }
                 else{
                     Toast.makeText(UserAdminAddActivity.this, "Registration fail", Toast.LENGTH_SHORT).show();

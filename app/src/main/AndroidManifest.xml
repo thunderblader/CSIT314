@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSIT314">
         <activity
+            android:name=".useradminview.UserAdminSearchList"
+            android:exported="false" />
+        <activity
             android:name=".useradminview.UserAdminSearchActivity"
             android:exported="false" />
         <activity
