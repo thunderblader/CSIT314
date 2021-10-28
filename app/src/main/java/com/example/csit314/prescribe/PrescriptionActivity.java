@@ -49,6 +49,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.example.csit314.prescribe.ui.main.SectionsPagerAdapter;
 import com.example.csit314.databinding.ActivityPrescriptionBinding;
 
+import java.util.ArrayList;
+
 public class PrescriptionActivity extends AppCompatActivity {
 
     private ActivityPrescriptionBinding binding;
@@ -69,7 +71,8 @@ public class PrescriptionActivity extends AppCompatActivity {
         int defaultValue = 0;
         int page = getIntent().getIntExtra("Two", defaultValue);
         viewPager.setCurrentItem(page);
-
+        //ArrayList<String> key = getIntent().getExtras().getStringArrayList("key");
+       // ArrayList<String> value = getIntent().getExtras().getStringArrayList("value");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

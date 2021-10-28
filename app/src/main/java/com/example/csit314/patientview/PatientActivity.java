@@ -41,9 +41,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class PatientActivity extends AppCompatActivity {
 
+    Bundle stringArrayList = getIntent().getExtras();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +54,13 @@ public class PatientActivity extends AppCompatActivity {
     }
 
     public void onPastPrescriptionClick(View view) {
-        //Intent i = new Intent(this, PrescriptionActivity.class);
-        //startActivity(i);
         int page = 2;
         Intent intent = new Intent(this,PrescriptionActivity.class);
         intent.putExtra("One", page);// One is your argument
+        //ArrayList<String> key = stringArrayList.getStringArrayList("key");
+        //ArrayList<String> value = stringArrayList.getStringArrayList("value");
+        //intent.putStringArrayListExtra("key",key);
+        //intent.putStringArrayListExtra("value",value);
         startActivity(intent);
     }
 
@@ -63,6 +68,10 @@ public class PatientActivity extends AppCompatActivity {
         int page = 2;
         Intent intent = new Intent(this,PrescriptionActivity.class);
         intent.putExtra("Two", page);// One is your argument
+        ArrayList<String> key = stringArrayList.getStringArrayList("key");
+        ArrayList<String> value = stringArrayList.getStringArrayList("value");
+        intent.putStringArrayListExtra("key",key);
+        intent.putStringArrayListExtra("value",value);
         startActivity(intent);
     }
 

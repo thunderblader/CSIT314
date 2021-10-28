@@ -5,10 +5,10 @@
     android:gravity="center"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Prescription"
-        android:textSize="30sp"
-        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment2_recyclerview"
+        android:background="#D9D7D4"
+        android:paddingTop="1dp"/>
 </LinearLayout>

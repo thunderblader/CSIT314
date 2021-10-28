@@ -39,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class LoginActivity extends AppCompatActivity {
@@ -153,15 +154,17 @@ public class LoginActivity extends AppCompatActivity {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
-                //launchPatientActivity(v);
-                launchUserAdminActivity(v);
+                launchPatientActivity(v);
+                //launchUserAdminActivity(v);
             }
         });
     }
 
     public void launchPatientActivity(View v) //launch to PatientActivity
     {
-        Intent i = new Intent(this, PatientActivity.class);
+        Intent i = new Intent(this, PrescriptionActivity.class);
+        //i.putStringArrayListExtra("key",new ArrayList<String>(firebase_object.get_pastprescription("test").keySet()));
+        //i.putStringArrayListExtra("value",new ArrayList<String>(firebase_object.get_pastprescription("test").values()));
         startActivity(i);
     }
 
