@@ -21,9 +21,10 @@ import java.util.List;
 
 public class UserAdminSearchList extends AppCompatActivity {
 
-    private static final String TAG = "ViewDatabase";
+    private static String TAG = "";
 
     private ListView mListView;
+    private List<String> keys = new ArrayList<>();
 
     DatabaseReference reference;
     FirebaseDatabase database;
@@ -44,7 +45,7 @@ public class UserAdminSearchList extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //search(snapshot);
+                search(snapshot);
             }
 
             @Override
@@ -52,6 +53,20 @@ public class UserAdminSearchList extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void search(DataSnapshot snapshot) {
+        for(DataSnapshot ds : snapshot.getChildren()){
+
+            UserAdminAddHelper helper = new UserAdminAddHelper();
+
+            TAG = ds.getValue().toString();
+
+            keys.add(TAG);
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, keys);
+            mListView.setAdapter(adapter);
+        }
     }
 
 
