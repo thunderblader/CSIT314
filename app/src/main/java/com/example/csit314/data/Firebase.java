@@ -12,6 +12,7 @@ import com.example.csit314.useradminview.UserAdminAddActivity;
 import com.example.csit314.useradminview.UserAdminAddHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,9 +45,15 @@ public class Firebase {
     private DataSnapshot dataSnapshot;
     private DataSnapshot dataSnapshotReference;
 
+    private AuthCredential credential;
+    private FirebaseUser theuser;
+
+    private Calendar the_time;
+
     private String the_name;
     private String the_number;
     private String the_userType;
+    private String the_email;
 
     private boolean signed_in = false;
     private boolean firebase_ready = false;
@@ -66,7 +75,7 @@ public class Firebase {
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
     public String getThe_userType() { return the_userType; }
-    public String getThe_userData(String data_name) { return dataSnapshotReference.child("User_Group").child(getUID()).child(data_name).getValue().toString(); }
+    public String getThe_userData(String user_email, String data_name) { return dataSnapshotReference.child("User_Group").child(user_email).child(data_name).getValue().toString(); }
 
     public Firebase(Activity currentActivity)
     {
@@ -105,10 +114,11 @@ public class Firebase {
             start_firebase();
     }
 
-    private void complete_signin()
+    private void complete_signin(String email)
     {
         signed_in = true;
-        user_ref = mDatabase.child("User_Group").child(getUID());
+        the_email = email;
+        user_ref = mDatabase.child("User_Group").child(convert_email(the_email));
         current_User = mAuth.getCurrentUser();
     }
 
@@ -121,7 +131,7 @@ public class Firebase {
                     {
                         if (task.isSuccessful())
                         {
-                            complete_signin();
+                            complete_signin(email);
                             setData(number, name, user_type);
                             fetch_database(mDatabase);
                         }
@@ -138,7 +148,7 @@ public class Firebase {
                 {
                     if (task.isSuccessful())
                     {
-                        complete_signin();
+                        complete_signin(email);
                         fetch_database(mDatabase);
                     }
                 }
@@ -163,7 +173,7 @@ public class Firebase {
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 dataSnapshotReference = dataSnapshot;
-                the_map = (Map) dataSnapshot.child("User_Group").child(getUID()).getValue();
+                the_map = (Map) dataSnapshot.child("User_Group").child(the_email).getValue();
                 fetchData();
                 database_ready = true;
             }
@@ -176,15 +186,15 @@ public class Firebase {
 
     private void fetchData()
     {
-        the_number = dataSnapshotReference.child("User_Group").child(getUID()).child("number").getValue().toString();
-        the_name = dataSnapshotReference.child("User_Group").child(getUID()).child("name").getValue().toString();
-        the_userType = dataSnapshotReference.child("User_Group").child(getUID()).child("user_type").getValue().toString();
+        the_number = dataSnapshotReference.child("User_Group").child(the_email).child("number").getValue().toString();
+        the_name = dataSnapshotReference.child("User_Group").child(the_email).child("name").getValue().toString();
+        the_userType = dataSnapshotReference.child("User_Group").child(the_email).child("user_type").getValue().toString();
     }
 
     public Map<String, String> get_pastprescription(String user_id)
     {
         //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(user_id).child("prescription").getValue();
-        Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(getUID()).getValue();
+        Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
         return my_prescription;
     }
 
@@ -198,29 +208,42 @@ public class Firebase {
         return randomString.toString();
     }
 
+    public void change_password(String password)
+    {
+        FirebaseUser user = mAuth.getCurrentUser();
+        user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<Void> task)
+            {
+                if(task.isSuccessful())
+                {
+                    //password sucessfully changed
+                }
+            }
+        });
+    }
+
+    private Map<String, String> searchUser(String user_email)
+    {
+        Map<String, String> the_user = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).getValue();
+        return the_user;
+    }
+
+    public String get_time()
+    {
+        SimpleDateFormat the_format = new SimpleDateFormat("dd-MM-yyyy");
+        String time_format = the_format.format(Calendar.getInstance().getTime());
+        return time_format;
+    }
+    public void add_prescription(String patient_email, String data) { mDatabase.child("User_Group").child(the_email).child("prescription").child(get_time()).setValue(data); }
+
+    public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
+
+    private String convert_email(String email) { return email.replace('.', '_'); }
+
     //============================================================================
     //below this line is for testing purposes ONLY
-
-    //reading from database requires firebase user to not be null
-    private void writetoDatabase()
-    {
-        mDatabase.setValue("user1");
-    }
-
-    private String readfromDatabase()   //we need to read the database to get a snapshot of the data
-    {
-        String data = mDatabase.get().toString();
-        if (data != null)
-            return data;
-        else
-            return null;
-    }
-
-    private String searchUser(String email)
-    {
-       // UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
-        return "";
-    }
 
     private String[] readPrecription(String name)    //name -> data (date,drug,drug,drug...)
     {
@@ -244,5 +267,20 @@ public class Firebase {
         return theData;
     }
 
+    public void delete_user()
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                        {
+
+                        }
+                    }
+                });
+    }
 
 }
