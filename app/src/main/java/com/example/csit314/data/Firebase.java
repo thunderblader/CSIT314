@@ -41,14 +41,8 @@ public class Firebase {
     private FirebaseDatabase database;
     private DatabaseReference mDatabase;
     private DatabaseReference user_ref;
-    private ValueEventListener postListener;
     private DataSnapshot dataSnapshot;
     private DataSnapshot dataSnapshotReference;
-
-    private AuthCredential credential;
-    private FirebaseUser theuser;
-
-    private Calendar the_time;
 
     private String the_name;
     private String the_number;
@@ -65,13 +59,6 @@ public class Firebase {
 
     private Map<String, String> the_map;
 
-    //public FirebaseUser getCurrent_User() { return current_User; }
-    //public FirebaseAuth getmAuth() { return mAuth; }
-    //public FirebaseDatabase getDatabase() { return database; }
-
-    public DatabaseReference getDatabase_ref() { return user_ref; }
-
-    public String getUID() { return mAuth.getUid(); }
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
     public String getThe_userType() { return the_userType; }
@@ -105,11 +92,7 @@ public class Firebase {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         if(mAuth != null && mDatabase != null)
-        {
-            //if(mAuth.getCurrentUser() != null)  //incase the user is still signed in
-            //    complete_signin();
             firebase_ready = true;
-        }
         if(!firebase_ready)
             start_firebase();
     }
@@ -159,6 +142,14 @@ public class Firebase {
 
     private void setData(String number, String name, String user_type)
     {
+        if(user_type == "doctor")
+            mDatabase.child("doctors").setValue(the_email);
+        else if (user_type == "admin")
+            mDatabase.child("admins").setValue(the_email);
+        else if (user_type == "patient")
+            mDatabase.child("patients").setValue(the_email);
+        else
+            mDatabase.child("patients").setValue(the_email);
         user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
@@ -191,13 +182,6 @@ public class Firebase {
         the_userType = dataSnapshotReference.child("User_Group").child(the_email).child("user_type").getValue().toString();
     }
 
-    public Map<String, String> get_pastprescription(String user_id)
-    {
-        //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(user_id).child("prescription").getValue();
-        Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
-        return my_prescription;
-    }
-
     public String generateRandomstring(int length)
     {
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -224,11 +208,36 @@ public class Firebase {
         });
     }
 
-    private Map<String, String> searchUser(String user_email)
+    public Map<String, String> searchUser(String user_email)
     {
         Map<String, String> the_user = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).getValue();
         return the_user;
     }
+
+    public Map<String, String> searchUser_type(String user_type)
+    {
+        Map<String, String> the_usertype = (Map) dataSnapshotReference.child(user_type).getValue();
+        return the_usertype;
+    }
+
+    public Map<String, String> get_prescription(String the_prescription)
+    {
+        Map<String, String> prescription = (Map) dataSnapshotReference.child("medication").child(the_prescription).getValue();
+        return prescription;
+    }
+
+    public Map<String, String> get_pastprescription(String user_email)
+    {
+        Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("prescription").getValue();
+        //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
+        return my_prescription;
+    }
+
+    public void add_prescription(String patient_email, String data) { mDatabase.child("User_Group").child(the_email).child("prescription").child(get_time()).setValue(data); }
+
+    public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
+
+    private String convert_email(String email) { return email.replace('.', '_'); }
 
     public String get_time()
     {
@@ -236,11 +245,6 @@ public class Firebase {
         String time_format = the_format.format(Calendar.getInstance().getTime());
         return time_format;
     }
-    public void add_prescription(String patient_email, String data) { mDatabase.child("User_Group").child(the_email).child("prescription").child(get_time()).setValue(data); }
-
-    public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
-
-    private String convert_email(String email) { return email.replace('.', '_'); }
 
     //============================================================================
     //below this line is for testing purposes ONLY
