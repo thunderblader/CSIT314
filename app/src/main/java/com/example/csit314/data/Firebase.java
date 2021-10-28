@@ -2,14 +2,9 @@ package com.example.csit314.data;
 
 import android.app.Activity;
 import android.os.CountDownTimer;
-import android.renderscript.Sampler;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.example.csit314.useradminview.UserAdminAddActivity;
-import com.example.csit314.useradminview.UserAdminAddHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,15 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Executor;
 
 public class Firebase {
 
@@ -123,6 +111,7 @@ public class Firebase {
                         {
                             complete_signin();
                             setData(number, name, user_type);
+
                             fetch_database(mDatabase);
                         }
                     }
@@ -155,7 +144,7 @@ public class Firebase {
         user_ref.child("user_type").setValue(user_type);
     }
 
-    private void fetch_database(DatabaseReference the_reference)
+    public void fetch_database(DatabaseReference the_reference)
     {
         ValueEventListener postListener = new ValueEventListener()
         {
@@ -243,6 +232,4 @@ public class Firebase {
         });
         return theData;
     }
-
-
 }

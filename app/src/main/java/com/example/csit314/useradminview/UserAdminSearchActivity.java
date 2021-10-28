@@ -1,5 +1,6 @@
 package com.example.csit314.useradminview;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,8 +9,16 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.example.csit314.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserAdminSearchActivity extends AppCompatActivity {
 
@@ -53,8 +62,6 @@ public class UserAdminSearchActivity extends AppCompatActivity {
                     SearchUID.requestFocus();
                     return;
                 }
-
-                TextName.setText("found");
             }
         }));
 
@@ -69,8 +76,8 @@ public class UserAdminSearchActivity extends AppCompatActivity {
                     return;
                 }
 
-                TextNumber.setText("found");
-                TextUserGroup.setText("found");
+                startActivity(new Intent(UserAdminSearchActivity.this, UserAdminSearchList.class));
+                finish();
             }
         });
 
