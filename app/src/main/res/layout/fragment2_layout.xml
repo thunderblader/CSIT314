@@ -5,6 +5,17 @@
     android:gravity="center"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/search_border"
+        android:hint="  Search"
+        android:orientation="vertical"
+        android:selectAllOnFocus="true"
+        android:paddingLeft="8dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

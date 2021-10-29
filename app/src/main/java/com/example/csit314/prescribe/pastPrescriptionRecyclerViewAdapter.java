@@ -17,6 +17,7 @@ import com.example.csit314.useradminview.UserAdminSearchList;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,5 +65,11 @@ public class pastPrescriptionRecyclerViewAdapter extends RecyclerView.Adapter<pa
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void filterList(ArrayList<Prescription> filteredList)
+    {
+        mData = filteredList;
+        notifyDataSetChanged();
     }
 }

@@ -169,10 +169,9 @@ public class LoginActivity extends AppCompatActivity {
     {
         Intent i = new Intent(this, PrescriptionActivity.class);
         Map p = firebase_object.get_pastprescription2("theemail1234567@gmail.com");
-        ArrayList<Prescription> prescriptionAList = new ArrayList<Prescription>();
+        ArrayList<Prescription> prescriptionAList;
         prescriptionAList = collectPrescription(p);
         i.putExtra("ArrayList",prescriptionAList);
-        //i.putExtra("map",(Serializable) p);
         startActivity(i);
     }
     public ArrayList<Prescription> collectPrescription(Map<String,Object> p)
@@ -183,15 +182,18 @@ public class LoginActivity extends AppCompatActivity {
         Long amount;
         String status;
         String date;
-        for (Map.Entry<String, Object> entry: p.entrySet())
-        {
-            Map singlePrescription = (Map) entry.getValue();
-            name = (String) singlePrescription.get("name");
-            amount = (Long) singlePrescription.get("amount");
-            status = (String) singlePrescription.get("status");
-            date = (String) singlePrescription.get("date");
-            prescriptionAlist.add(new Prescription(name,date,String.valueOf(amount),status));
-        }
+            for (Map.Entry<String, Object> entry: p.entrySet())
+            {
+                Map singlePrescription = (Map) entry.getValue();
+                name = (String) singlePrescription.get("name");
+                status = (String) singlePrescription.get("status");
+                date = (String) singlePrescription.get("date");
+                if(singlePrescription.get("amount") instanceof String)
+                    amount = Long.parseLong((String)"0");
+                else
+                    amount = (Long) singlePrescription.get("amount");
+                prescriptionAlist.add(new Prescription(name, date, String.valueOf(amount), status));
+            }
         return prescriptionAlist;
     }
     public void launchUserAdminActivity(View v) //launch to UserAdminActivity

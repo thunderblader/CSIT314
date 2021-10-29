@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.csit314.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,5 +61,11 @@ public class newPrescriptionRecyclerViewAdapter extends RecyclerView.Adapter<new
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void filterList(ArrayList<Prescription> filteredList)
+    {
+        mData = filteredList;
+        notifyDataSetChanged();
     }
 }
