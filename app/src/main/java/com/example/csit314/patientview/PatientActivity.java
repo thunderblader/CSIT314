@@ -57,10 +57,10 @@ public class PatientActivity extends AppCompatActivity {
         int page = 2;
         Intent intent = new Intent(this,PrescriptionActivity.class);
         intent.putExtra("One", page);// One is your argument
-        //ArrayList<String> key = stringArrayList.getStringArrayList("key");
-        //ArrayList<String> value = stringArrayList.getStringArrayList("value");
-        //intent.putStringArrayListExtra("key",key);
-        //intent.putStringArrayListExtra("value",value);
+        ArrayList<String> key = stringArrayList.getStringArrayList("key");
+        ArrayList<String> value = stringArrayList.getStringArrayList("value");
+        intent.putStringArrayListExtra("key",key);
+        intent.putStringArrayListExtra("value",value);
         startActivity(intent);
     }
 

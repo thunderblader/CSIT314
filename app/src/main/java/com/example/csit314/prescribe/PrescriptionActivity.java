@@ -2,6 +2,7 @@ package com.example.csit314.prescribe;
 
 import android.os.Bundle;
 
+import com.example.csit314.data.Firebase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabItem;
@@ -10,6 +11,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,10 +51,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.example.csit314.prescribe.ui.main.SectionsPagerAdapter;
 import com.example.csit314.databinding.ActivityPrescriptionBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class PrescriptionActivity extends AppCompatActivity {
-
     private ActivityPrescriptionBinding binding;
 
     @Override
@@ -62,7 +66,9 @@ public class PrescriptionActivity extends AppCompatActivity {
         binding = ActivityPrescriptionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ArrayList<Prescription> prescriptionList = new ArrayList<Prescription>();
+        prescriptionList = (ArrayList<Prescription>) getIntent().getSerializableExtra("ArrayList");
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(),prescriptionList);
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
@@ -71,8 +77,6 @@ public class PrescriptionActivity extends AppCompatActivity {
         int defaultValue = 0;
         int page = getIntent().getIntExtra("Two", defaultValue);
         viewPager.setCurrentItem(page);
-        //ArrayList<String> key = getIntent().getExtras().getStringArrayList("key");
-       // ArrayList<String> value = getIntent().getExtras().getStringArrayList("value");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

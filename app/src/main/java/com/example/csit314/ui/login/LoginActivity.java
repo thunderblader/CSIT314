@@ -3,6 +3,7 @@ package  com.example.csit314.ui.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -25,6 +26,7 @@ import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
 import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.patientview.PatientActivity;
+import com.example.csit314.prescribe.Prescription;
 import com.example.csit314.prescribe.PrescriptionActivity;
 import com.example.csit314.useradminview.UserAdminActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,7 +41,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         String temp;
 
             //firebase_object.signout();
-            firebase_object.signIn("theemail12345678@gmail.com", "123456");
+            firebase_object.signIn("theemail1234567@gmail.com", "123456");
             //firebase_object.createAccount("theemail1@gmail.com", "123456", "111", "222","333");
             //temp = firebase_object.getThe_number();
             /*temp = firebase_object.getThe_userType();
@@ -163,11 +168,32 @@ public class LoginActivity extends AppCompatActivity {
     public void launchPatientActivity(View v) //launch to PatientActivity
     {
         Intent i = new Intent(this, PrescriptionActivity.class);
-        //i.putStringArrayListExtra("key",new ArrayList<String>(firebase_object.get_pastprescription("test").keySet()));
-        //i.putStringArrayListExtra("value",new ArrayList<String>(firebase_object.get_pastprescription("test").values()));
+        Map p = firebase_object.get_pastprescription2("theemail1234567@gmail.com");
+        ArrayList<Prescription> prescriptionAList = new ArrayList<Prescription>();
+        prescriptionAList = collectPrescription(p);
+        i.putExtra("ArrayList",prescriptionAList);
+        //i.putExtra("map",(Serializable) p);
         startActivity(i);
     }
+    public ArrayList<Prescription> collectPrescription(Map<String,Object> p)
+    {
+        ArrayList<Prescription> prescriptionAlist = new ArrayList<>();
 
+        String name;
+        Long amount;
+        String status;
+        String date;
+        for (Map.Entry<String, Object> entry: p.entrySet())
+        {
+            Map singlePrescription = (Map) entry.getValue();
+            name = (String) singlePrescription.get("name");
+            amount = (Long) singlePrescription.get("amount");
+            status = (String) singlePrescription.get("status");
+            date = (String) singlePrescription.get("date");
+            prescriptionAlist.add(new Prescription(name,date,String.valueOf(amount),status));
+        }
+        return prescriptionAlist;
+    }
     public void launchUserAdminActivity(View v) //launch to UserAdminActivity
     {
         Intent i = new Intent(this, UserAdminActivity.class);

@@ -159,7 +159,7 @@ public class Firebase {
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 dataSnapshotReference = dataSnapshot;
-                the_map = (Map) dataSnapshot.child("User_Group").child(the_email).getValue();
+                the_map = (Map) dataSnapshot.child("User_Group").child(convert_email(the_email)).getValue();
                 fetchData();
                 database_ready = true;
             }
@@ -172,9 +172,10 @@ public class Firebase {
 
     private void fetchData()
     {
-        the_number = dataSnapshotReference.child("User_Group").child(the_email).child("number").getValue().toString();
-        the_name = dataSnapshotReference.child("User_Group").child(the_email).child("name").getValue().toString();
-        the_userType = dataSnapshotReference.child("User_Group").child(the_email).child("user_type").getValue().toString();
+        the_number = dataSnapshotReference.child("User_Group").child(convert_email(the_email)).child("number").getValue().toString();
+        the_name = dataSnapshotReference.child("User_Group").child(convert_email(the_email)).child("name").getValue().toString();
+        the_userType = dataSnapshotReference.child("User_Group").child(convert_email(the_email)).child("user_type").getValue().toString();
+
     }
 
     public String generateRandomstring(int length)
@@ -227,7 +228,12 @@ public class Firebase {
         //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
         return my_prescription;
     }
-
+    public Map<String, Object> get_pastprescription2(String user_email)
+    {
+        Map<String, Object> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("prescription").getValue();
+        //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
+        return my_prescription;
+    }
     public void add_prescription(String patient_email, String data) { mDatabase.child("User_Group").child(the_email).child("prescription").child(get_time()).setValue(data); }
 
     public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }

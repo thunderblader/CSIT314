@@ -1,6 +1,8 @@
 package com.example.csit314.prescribe.ui.main;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -9,6 +11,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.csit314.R;
+import com.example.csit314.prescribe.Prescription;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -19,10 +25,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
-
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    private ArrayList<Prescription> alist;
+    public SectionsPagerAdapter(Context context, FragmentManager fm, ArrayList<Prescription> alist) {
         super(fm);
         mContext = context;
+        this.alist = new ArrayList<Prescription>();
+        this.alist = alist;
     }
 
     @Override
@@ -40,6 +48,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new NewPrescriptionFragment();
                 break;
 
+        }
+        if (fragment != null)
+        {
+            Bundle bundle = new Bundle();
+            fragment.setArguments(bundle);
+            bundle.putParcelableArrayList("ArrayList",(ArrayList<? extends Parcelable>) alist);
+            fragment.setArguments(bundle);
         }
         return fragment;
     }
