@@ -45,16 +45,23 @@ public class NewPrescriptionFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listPrescription = new ArrayList<>();
-        listPrescription.add(new Prescription("name1", "2", "3", "4"));
+        listPrescription = new ArrayList<Prescription>();
+        ArrayList<Prescription> allPrescriptionAList = new ArrayList<Prescription>();
+        allPrescriptionAList = getArguments().getParcelableArrayList("ArrayList");
+        for(Prescription p : allPrescriptionAList)
+        {
+            if(p.getpStatus().equals("in progress") )
+                listPrescription.add(p);
+        }
+       // listPrescription.add(new Prescription("name1", "2", "3", "4"));
 
-        listPrescription.add(new Prescription("name5", "6", "7", "8"));
+       // listPrescription.add(new Prescription("name5", "6", "7", "8"));
 
-        listPrescription.add(new Prescription("name9", "10", "11", "12"));
+       // listPrescription.add(new Prescription("name9", "10", "11", "12"));
 
-        listPrescription.add(new Prescription("name13", "14", "15", "16"));
+       // listPrescription.add(new Prescription("name13", "14", "15", "16"));
 
-        listPrescription.add(new Prescription("name17", "18", "19", "20"));
+       // listPrescription.add(new Prescription("name17", "18", "19", "20"));
 
     }
 }
