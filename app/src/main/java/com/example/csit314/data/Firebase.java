@@ -32,7 +32,6 @@ public class Firebase {
 
     private FirebaseUser current_User;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
     private DatabaseReference mDatabase;
     private DatabaseReference user_ref;
     private DataSnapshot dataSnapshot;

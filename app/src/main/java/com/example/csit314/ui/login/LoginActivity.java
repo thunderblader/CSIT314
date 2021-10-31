@@ -29,6 +29,7 @@ import com.example.csit314.patientview.PatientActivity;
 import com.example.csit314.prescribe.Prescription;
 import com.example.csit314.prescribe.PrescriptionActivity;
 import com.example.csit314.useradminview.UserAdminActivity;
+<<<<<<< Updated upstream
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -46,6 +47,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+=======
+>>>>>>> Stashed changes
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,91 +57,75 @@ public class LoginActivity extends AppCompatActivity {
 
     private Firebase firebase_object = new Firebase(this);
 
-        @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        String temp;
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            //launchLoginActivity();
 
             //firebase_object.signout();
             firebase_object.signIn("theemail1234567@gmail.com", "123456");
             //firebase_object.createAccount("theemail1@gmail.com", "123456", "111", "222","333");
-            //temp = firebase_object.getThe_number();
-            /*temp = firebase_object.getThe_userType();
-            temp = firebase_object.getThe_name();
-            firebase_object.signout();
-            firebase_object.signIn("thunderblader@live.com", "123456");
-            temp = firebase_object.getUID();*/
-            //firebase_object.getDatabase();
 
-     binding = ActivityLoginBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
+            binding = ActivityLoginBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+            //loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
-        final ProgressBar loadingProgressBar = binding.loading;
+            final EditText usernameEditText = binding.username;
+            final EditText passwordEditText = binding.password;
+            final Button loginButton = binding.login;
+            final ProgressBar loadingProgressBar = binding.loading;
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
+            loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>()
+            {
+                @Override
+                public void onChanged(@Nullable LoginFormState loginFormState)
+                {
+                    if (loginFormState == null)
+                        return;
+                    loginButton.setEnabled(loginFormState.isDataValid());
+                    if (loginFormState.getUsernameError() != null)
+                        usernameEditText.setError(getString(loginFormState.getUsernameError()));
+                    if (loginFormState.getPasswordError() != null)
+                        passwordEditText.setError(getString(loginFormState.getPasswordError()));
                 }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
+            });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
+             loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>()
+             {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
+                if (loginResult == null)
                     return;
-                }
                 loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
+                if (loginResult.getError() != null)
                     showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
+                if (loginResult.getSuccess() != null)
                     updateUiWithUser(loginResult.getSuccess());
-                }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
+                //this is where we want to move to the next activity
                 finish();
             }
         });
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
+        TextWatcher afterTextChangedListener = new TextWatcher()
+        {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
+            public void afterTextChanged(Editable s) { loginViewModel.loginDataChanged(usernameEditText.getText().toString(), passwordEditText.getText().toString()); }
         };
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
+        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -149,7 +136,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
 
             public void onClick(View v) //when you clock the login button
@@ -163,6 +151,11 @@ public class LoginActivity extends AppCompatActivity {
                 //launchUserAdminActivity(v);
             }
         });
+    }
+    public void launchLoginActivity(View v) //launch to LoginActivity
+    {
+        Intent i = new Intent(this, PatientActivity.class);
+        startActivity(i);
     }
 
     public void launchPatientActivity(View v) //launch to PatientActivity
