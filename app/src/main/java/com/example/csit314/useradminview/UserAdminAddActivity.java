@@ -113,22 +113,4 @@ public class UserAdminAddActivity extends AppCompatActivity {
             }
         }));
     }
-
-    private void registerUser(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(UserAdminAddActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(UserAdminAddActivity.this, "User create Successful", Toast.LENGTH_SHORT).show();
-                    reference = FirebaseDatabase.getInstance().getReference();
-                    UserAdminAddHelper userAdminAddHelper = new UserAdminAddHelper(Name, Email, Password, Number, UserGroup);
-
-                    reference.child(UserGroup).child(auth.getCurrentUser().getUid()).setValue(userAdminAddHelper);
-                }
-                else{
-                    Toast.makeText(UserAdminAddActivity.this, "Registration fail", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 }

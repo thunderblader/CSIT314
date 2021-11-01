@@ -2,6 +2,7 @@ package com.example.csit314.useradminview;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.csit314.R;
+import com.example.csit314.data.Firebase;
+import com.example.csit314.prescribe.Prescription;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class UserAdminSearchActivity extends AppCompatActivity {
 
@@ -36,6 +42,11 @@ public class UserAdminSearchActivity extends AppCompatActivity {
     String UID_Name, UserGrp_Name;
     String txt_Name, txt_Number, txt_UserGroup;
 
+    Firebase fb = new Firebase(UserAdminSearchActivity.this);
+
+    private ArrayList<UserAdminHelper> alist = new ArrayList<>();
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +63,8 @@ public class UserAdminSearchActivity extends AppCompatActivity {
         backButton = findViewById(R.id.SearchBackButton);
         updateButton = findViewById(R.id.SearchUpdateButton);
 
+        fb.signIn("theemail1234567@gmail.com", "123456");
+
         SearchSearchButtonUID.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +75,19 @@ public class UserAdminSearchActivity extends AppCompatActivity {
                     SearchUID.requestFocus();
                     return;
                 }
+
+                txt_Name = fb.searchUser("theemail1234567@gmail.com").get("name");
+                txt_Number = fb.searchUser("theemail1234567@gmail.com").get("number");
+                txt_UserGroup = fb.searchUser("theemail1234567@gmail.com").get("user_type");
+
+                UserAdminHelper uah = new UserAdminHelper();
+                uah.setName(txt_Name);
+                uah.setNumber(txt_Number);
+                uah.setUser_group(txt_UserGroup);
+
+                TextName.setText(uah.getName());
+                TextNumber.setText(uah.getNumber());
+                TextUserGroup.setText(uah.getUser_group());
             }
         }));
 
@@ -103,9 +129,7 @@ public class UserAdminSearchActivity extends AppCompatActivity {
                     TextUserGroup.requestFocus();
                     return;
                 }
-                else{
-
-                }
+                fb.updateUser(UID_Name, txt_Number, txt_Name, txt_UserGroup);
             }
         });
 
@@ -116,5 +140,12 @@ public class UserAdminSearchActivity extends AppCompatActivity {
                 finish();
             }
         }));
+    }
+    private void collectusers(Map<String, Object> users){
+        ArrayList<UserAdminHelper> helper = new ArrayList<>();
+        for(Map.Entry<String, Object> entry : users.entrySet()){
+            Map singleUser = (Map) entry.getValue();
+            helper.add(new UserAdminHelper((String) singleUser.get("name"), (String) singleUser.get("number"), (String) singleUser.get("user_type")));
+        }
     }
 }

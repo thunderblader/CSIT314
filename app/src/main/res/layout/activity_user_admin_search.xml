@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".useradminview.UserAdminSearchActivity">
 
-    <TextView
-        android:id="@+id/textViewSearchUser"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:autoSizeTextType="uniform"
-        android:text="Search User"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/AddSearchTextUID"
         android:layout_width="wrap_content"

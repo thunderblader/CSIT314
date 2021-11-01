@@ -35,6 +35,7 @@ public class Firebase {
     private FirebaseDatabase database;
     private DatabaseReference mDatabase;
     private DatabaseReference user_ref;
+    private DatabaseReference update_ref;
     private DataSnapshot dataSnapshot;
     private DataSnapshot dataSnapshotReference;
 
@@ -207,6 +208,20 @@ public class Firebase {
     public Map<String, String> searchUser(String user_email)
     {
         Map<String, String> the_user = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).getValue();
+        return the_user;
+    }
+
+    public void updateUser(String user_email, String number, String name, String user_type)
+    {
+        update_ref = mDatabase.child("User_Group").child(convert_email(user_email));
+        update_ref.child("number").setValue(number);
+        update_ref.child("name").setValue(name);
+        update_ref.child("user_type").setValue(user_type);
+    }
+
+    public Map<String, Object> searchUser2(String user_email)
+    {
+        Map<String, Object> the_user = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("credentials").getValue();
         return the_user;
     }
 

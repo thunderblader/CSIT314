@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/UserAdminSearchAdapterTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="name:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/UserAdminSearchAdapterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:text="testing"
+        app:layout_constraintStart_toEndOf="@+id/UserAdminSearchAdapterTextName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/UserAdminSearchAdapterTextNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Number:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserAdminSearchAdapterTextName" />
+
+    <TextView
+        android:id="@+id/UserAdminSearchAdapterTextUserGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="User Group:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserAdminSearchAdapterTextNumber" />
+
+    <TextView
+        android:id="@+id/UserAdminSearchAdapterNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="25dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/UserAdminSearchAdapterTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/UserAdminSearchAdapterName" />
+
+    <TextView
+        android:id="@+id/UserAdminSearchAdapterUserGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="25dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/UserAdminSearchAdapterTextUserGrp"
+        app:layout_constraintTop_toBottomOf="@+id/UserAdminSearchAdapterNumber" />
+</androidx.constraintlayout.widget.ConstraintLayout>
