@@ -29,7 +29,6 @@ import com.example.csit314.patientview.PatientActivity;
 import com.example.csit314.prescribe.Prescription;
 import com.example.csit314.prescribe.PrescriptionActivity;
 import com.example.csit314.useradminview.UserAdminActivity;
-<<<<<<< Updated upstream
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -47,8 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-=======
->>>>>>> Stashed changes
+
 
 public class LoginActivity extends AppCompatActivity {
 

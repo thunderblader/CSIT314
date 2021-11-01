@@ -2,6 +2,7 @@ package com.example.csit314.data;
 
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -51,6 +52,8 @@ public class Firebase {
     private Activity activityReference;
 
     private Map<String, String> the_map;
+
+    public  Firebase get_firebase() { return this; }
 
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
@@ -127,6 +130,10 @@ public class Firebase {
                     {
                         complete_signin(email);
                         fetch_database(mDatabase);
+                    }
+                    else
+                    {
+                        Toast.makeText(activityReference.getApplicationContext(), "Invalid Email or Password", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -244,46 +251,5 @@ public class Firebase {
         SimpleDateFormat the_format = new SimpleDateFormat("dd-MM-yyyy");
         String time_format = the_format.format(Calendar.getInstance().getTime());
         return time_format;
-    }
-
-    //============================================================================
-    //below this line is for testing purposes ONLY
-
-    private String[] readPrecription(String name)    //name -> data (date,drug,drug,drug...)
-    {
-        //StringTokenizer token = new StringTokenizer("", ",");
-        if(dataSnapshot.child(name).getChildrenCount() == 0)
-            return null;
-        int i = 0;
-        String[] theData = new String[(int)dataSnapshot.child(name).getChildrenCount()];
-        mDatabase.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                for (DataSnapshot dataSnap : dataSnapshot.getChildren())
-                {
-                    String thisData = dataSnap.getValue(String.class);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-        return theData;
-    }
-
-    public void delete_user()
-    {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
-
-                        }
-                    }
-                });
     }
 }
