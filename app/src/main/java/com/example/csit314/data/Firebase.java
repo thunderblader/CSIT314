@@ -144,14 +144,8 @@ public class Firebase {
 
     private void setData(String number, String name, String user_type)
     {
-        if(user_type == "doctor")
-            mDatabase.child("doctors").setValue(the_email);
-        else if (user_type == "admin")
-            mDatabase.child("admins").setValue(the_email);
-        else if (user_type == "patient")
-            mDatabase.child("patients").setValue(the_email);
-        else
-            mDatabase.child("patients").setValue(the_email);
+        mDatabase.child(user_type).child(the_email).setValue(name);
+        mDatabase.child(user_type).child(the_email).setValue(number);
         user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
