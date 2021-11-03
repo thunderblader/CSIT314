@@ -12,6 +12,11 @@ public class UserAdminHelper {
         this.user_group = user_group;
     }
 
+    public UserAdminHelper(String name, String number) {
+        this.name = name;
+        this.number = number;
+    }
+
     public String getName() {
         return name;
     }

@@ -2,6 +2,7 @@ package  com.example.csit314.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
 import com.example.csit314.databinding.ActivityLoginBinding;
+import com.example.csit314.useradminview.UserAdminActivity;
 
 public class theLoginActivity extends AppCompatActivity
 {
@@ -59,9 +61,17 @@ public class theLoginActivity extends AppCompatActivity
                 }
                 else
                 {
-                    the_firebase.signIn(user_Email, user_Password);
+                    String user_Type_admin = "admin";
+                    //if(user_Type_admin == the_firebase.getThe_userType())
+                        launchUserAdminActivity(v);
                 }
             }
         });
+    }
+
+    public void launchUserAdminActivity(View v) //launch to UserAdminActivity
+    {
+        Intent i = new Intent(this, UserAdminActivity.class);
+        startActivity(i);
     }
 }

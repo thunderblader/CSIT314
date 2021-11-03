@@ -225,15 +225,9 @@ public class Firebase {
         update_ref.child("user_type").setValue(user_type);
     }
 
-    public Map<String, Object> searchUser2(String user_email)
+    public Map<String, Object> searchUser_type(String user_type)
     {
-        Map<String, Object> the_user = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("credentials").getValue();
-        return the_user;
-    }
-
-    public Map<String, String> searchUser_type(String user_type)
-    {
-        Map<String, String> the_usertype = (Map) dataSnapshotReference.child(user_type).getValue();
+        Map<String, Object> the_usertype = (Map) dataSnapshotReference.child(user_type).getValue();
         return the_usertype;
     }
 

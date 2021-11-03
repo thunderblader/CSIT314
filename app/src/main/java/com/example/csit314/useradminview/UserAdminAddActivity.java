@@ -34,9 +34,6 @@ public class UserAdminAddActivity extends AppCompatActivity {
     private Button addButton;
     private Button backButton;
 
-    DatabaseReference reference;
-    FirebaseAuth auth;
-
     String Name, Email, Password, Number, UserGroup;
 
     @Override
@@ -52,8 +49,6 @@ public class UserAdminAddActivity extends AppCompatActivity {
 
         addButton = findViewById(R.id.AddAddButton);
         backButton = findViewById(R.id.AddBackButton);
-
-        auth = FirebaseAuth.getInstance();
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

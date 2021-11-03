@@ -25,13 +25,11 @@ public class UserAdminRecyclerAdapter extends RecyclerView.Adapter<UserAdminRecy
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView nameText;
         private TextView numberText;
-        private TextView userGrpText;
 
         public MyViewHolder(final View view) {
             super(view);
             nameText = view.findViewById(R.id.UserAdminSearchAdapterName);
             numberText = view.findViewById(R.id.UserAdminSearchAdapterNumber);
-            userGrpText = view.findViewById(R.id.UserAdminSearchAdapterUserGrp);
         }
     }
 
@@ -46,10 +44,8 @@ public class UserAdminRecyclerAdapter extends RecyclerView.Adapter<UserAdminRecy
     public void onBindViewHolder(@NonNull UserAdminRecyclerAdapter.MyViewHolder holder, int position) {
         String name = alist.get(position).getName();
         String number = alist.get(position).getNumber();
-        String userGrp = alist.get(position).getUser_group();
         holder.nameText.setText(name);
         holder.numberText.setText(number);
-        holder.userGrpText.setText(userGrp);
     }
 
     @Override

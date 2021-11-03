@@ -50,10 +50,10 @@ public class UserAdminSearchList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alist = new ArrayList<>();
-                alist = collectUser(fb.searchUser2("theemail1234567@gmail.com"));
-                //String name = fb.searchUser("theemail1234567@gmail.com").get("name");
-                //String number = fb.searchUser("theemail1234567@gmail.com").get("number");
-                // user_type = fb.searchUser("theemail1234567@gmail.com").get("user_type");
+                alist = collectUser(fb.searchUser_type("doctors"));
+                //String name = fb.searchUser2.get("name");
+                //String number = fb.searchUser2.get("number");
+                //String user_type = fb.searchUser2.get("user_type");
                 //alist.add(new UserAdminHelper(name, number, user_type));
 
                 setAdapter();
@@ -78,15 +78,13 @@ public class UserAdminSearchList extends AppCompatActivity {
 
         String name;
         String number;
-        String user_group;
         for (Map.Entry<String, Object> entry: p.entrySet())
         {
             Map singleUser = (Map) entry.getValue();
-            user_group = (String) singleUser.get("user_type");
             name = (String) singleUser.get("name");
             number = (String) singleUser.get("number");
 
-            collectUserAlist.add(new UserAdminHelper(name, number, user_group));
+            collectUserAlist.add(new UserAdminHelper(name, number));
         }
         return collectUserAlist;
     }

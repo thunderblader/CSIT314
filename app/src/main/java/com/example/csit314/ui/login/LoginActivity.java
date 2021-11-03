@@ -146,8 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString(),
                 //        passwordEditText.getText().toString());
-                //launchPatientActivity(v);
-                launchUserAdminActivity(v);
+                launchPatientActivity(v);
+                //launchUserAdminActivity(v);
             }
         });
     }
@@ -192,24 +192,6 @@ public class LoginActivity extends AppCompatActivity {
     {
         Intent i = new Intent(this, UserAdminActivity.class);
         startActivity(i);
-    }
-    public ArrayList<UserAdminHelper> collectUser(Map<String,Object> p)
-    {
-        ArrayList<UserAdminHelper> collectUserAlist = new ArrayList<>();
-
-        String name;
-        String number;
-        String user_group;
-        for (Map.Entry<String, Object> entry: p.entrySet())
-        {
-            Map singleUser = (Map) entry.getValue();
-            user_group = (String) singleUser.get("user_type");
-            name = (String) singleUser.get("name");
-            number = (String) singleUser.get("number");
-
-            collectUserAlist.add(new UserAdminHelper(name, number, user_group));
-        }
-        return collectUserAlist;
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
