@@ -116,6 +116,10 @@ public class Firebase {
 
                             fetch_database(mDatabase);
                         }
+                        else
+                        {
+                            Toast.makeText(activityReference.getApplicationContext(), "Email has been taken", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
