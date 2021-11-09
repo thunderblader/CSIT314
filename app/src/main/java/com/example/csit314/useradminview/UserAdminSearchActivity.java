@@ -43,6 +43,10 @@ public class UserAdminSearchActivity extends AppCompatActivity {
         //SearchUID = findViewById(R.id.NewPasswordTextUID);
         //SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
 
+
+        //SearchUID = findViewById(R.id.NewPasswordTextUID);
+        //SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
+
         TextName = findViewById(R.id.textViewUserAdminSearchName);
         TextNumber = findViewById(R.id.textViewUserAdminSearchNumber);
         TextUserGroup = findViewById(R.id.textViewUserAdminSearchUserGrp);
