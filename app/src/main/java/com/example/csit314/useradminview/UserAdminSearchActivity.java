@@ -33,9 +33,6 @@ public class UserAdminSearchActivity extends AppCompatActivity {
 
     Firebase fb = new Firebase(UserAdminSearchActivity.this);
 
-    private ArrayList<UserAdminHelper> alist = new ArrayList<>();
-    private RecyclerView recyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

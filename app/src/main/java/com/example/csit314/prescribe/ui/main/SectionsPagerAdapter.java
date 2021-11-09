@@ -53,7 +53,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         {
             Bundle bundle = new Bundle();
             fragment.setArguments(bundle);
-            bundle.putParcelableArrayList("ArrayList",(ArrayList<? extends Parcelable>) alist);
+            bundle.putParcelableArrayList("PrescriptionArrayList",(ArrayList<? extends Parcelable>) alist);
             fragment.setArguments(bundle);
         }
         return fragment;

@@ -33,7 +33,6 @@ public class PastPrescriptionFragment extends Fragment{
 
 
     View v;
-    private RecyclerView myrecyclerview;
     private List<Prescription> listPrescription;
     pastPrescriptionRecyclerViewAdapter recyclerAdapter;
     public PastPrescriptionFragment()
@@ -78,7 +77,10 @@ public class PastPrescriptionFragment extends Fragment{
 
         for(Prescription p : listPrescription)
         {
-            if(p.getpName().toLowerCase().contains(text.toLowerCase()))
+            if(p.getpName().toLowerCase().contains(text.toLowerCase())
+                    || p.getpStatus().toLowerCase().contains(text.toLowerCase())
+                    || p.getpDate().toLowerCase().contains(text.toLowerCase())
+                    || p.getpAmount().toLowerCase().contains(text.toLowerCase()))
             {
                 filteredList.add(p);
             }
@@ -91,7 +93,7 @@ public class PastPrescriptionFragment extends Fragment{
         super.onCreate(savedInstanceState);
         listPrescription = new ArrayList<Prescription>();
         ArrayList<Prescription> allPrescriptionAList = new ArrayList<Prescription>();
-        allPrescriptionAList = getArguments().getParcelableArrayList("ArrayList");
+        allPrescriptionAList = getArguments().getParcelableArrayList("PrescriptionArrayList");
         for(Prescription p : allPrescriptionAList)
         {
             if(p.getpStatus().equals("completed"))
