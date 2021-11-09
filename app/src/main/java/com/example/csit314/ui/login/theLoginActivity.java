@@ -73,15 +73,15 @@ public class theLoginActivity extends AppCompatActivity
                 }
                 else
                 {
-                    /*
+
                     String user_Type_admin = "admin";
                     //if(user_Type_admin == the_firebase.getThe_userType())
                         launchUserAdminActivity(v);
-                        */
+
                     the_firebase.signIn(user_Email, user_Password);
                     if(the_firebase.is_database_ready())
                     {
-                        launchPharmacyActivity(v);
+                        //launchPharmacyActivity(v);
                         //launchPatientActivity(v);
                     }
                 }

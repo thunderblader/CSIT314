@@ -50,8 +50,6 @@ public class UserAdminAddActivity extends AppCompatActivity {
         addButton = findViewById(R.id.AddAddButton);
         backButton = findViewById(R.id.AddBackButton);
 
-        //fb.signIn("theemail1234567@gmail.com", "123456");
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

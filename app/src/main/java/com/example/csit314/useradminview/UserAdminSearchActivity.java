@@ -22,7 +22,7 @@ public class UserAdminSearchActivity extends AppCompatActivity {
     private EditText TextNumber;
     private EditText TextUserGroup;
 
-    private Button SearchSearchButtonUID;
+    private Button SearchSearchButtonEmail;
     private Button SearchSearchButtonUserGrp;
     private Button backButton;
     private Button updateButton;
@@ -37,28 +37,20 @@ public class UserAdminSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_admin_search);
 
-
-        //SearchEmail = findViewById(R.id.AddSearchTextUID);
-
-        //SearchUID = findViewById(R.id.NewPasswordTextUID);
-        //SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
-
-
-        //SearchUID = findViewById(R.id.NewPasswordTextUID);
-        //SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
+        SearchEmail = findViewById(R.id.UserAdminSearchEmailText);
 
         TextName = findViewById(R.id.textViewUserAdminSearchName);
         TextNumber = findViewById(R.id.textViewUserAdminSearchNumber);
         TextUserGroup = findViewById(R.id.textViewUserAdminSearchUserGrp);
 
-        SearchSearchButtonUID = findViewById(R.id.ChangepasswordButtonUID);
+        SearchSearchButtonEmail = findViewById(R.id.ChangepasswordButtonUID);
         SearchSearchButtonUserGrp = findViewById(R.id.SearchSearchButtonUserGrp);
         backButton = findViewById(R.id.PasswordBackButton);
         updateButton = findViewById(R.id.PasswordUpdateButton);
 
         fb.signIn("theemail1234567@gmail.com", "123456");
 
-        SearchSearchButtonUID.setOnClickListener((new View.OnClickListener() {
+        SearchSearchButtonEmail.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Email = SearchEmail.getText().toString();

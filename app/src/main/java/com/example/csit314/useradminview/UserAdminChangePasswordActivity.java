@@ -26,7 +26,7 @@ public class UserAdminChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_admin_changepassword);
 
-        TextPassword = findViewById(R.id.NewPasswordTextUID);
+        TextPassword = findViewById(R.id.UserAdminSearchEmailText);
 
         backButton = findViewById(R.id.PasswordBackButton);
         updateButton = findViewById(R.id.PasswordUpdateButton);

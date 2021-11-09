@@ -7,7 +7,7 @@
     tools:context=".useradminview.UserAdminSearchActivity">
 
     <EditText
-        android:id="@+id/NewPasswordTextUID"
+        android:id="@+id/UserAdminSearchEmailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
@@ -15,7 +15,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="UID"
+        android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/textViewSearchUserGrp"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -24,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:text="Enter UID"
-        app:layout_constraintBottom_toTopOf="@+id/NewPasswordTextUID"
+        android:text="Enter Email"
+        app:layout_constraintBottom_toTopOf="@+id/UserAdminSearchEmailText"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

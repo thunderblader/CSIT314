@@ -149,8 +149,8 @@ public class Firebase {
         mDatabase.child(user_type).child(convert_email(the_email)).child("name").setValue(name);
         mDatabase.child(user_type).child(convert_email(the_email)).child("number").setValue(number);
 
-        mDatabase.child(user_type).child(the_email).setValue(name);
-        mDatabase.child(user_type).child(the_email).setValue(number);
+        //mDatabase.child(user_type).child(the_email).setValue(name);
+        //mDatabase.child(user_type).child(the_email).setValue(number);
        // user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
