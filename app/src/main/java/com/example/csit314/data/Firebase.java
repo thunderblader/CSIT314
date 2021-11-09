@@ -33,28 +33,17 @@ public class Firebase {
 
     private FirebaseUser current_User;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private DatabaseReference user_ref;
-    private DatabaseReference update_ref;
-    private DataSnapshot dataSnapshot;
+    private DatabaseReference mDatabase, user_ref, update_ref;
     private DataSnapshot dataSnapshotReference;
 
-    private String the_name;
-    private String the_number;
-    private String the_userType;
-    private String the_email;
+    private String the_name, the_number, the_userType, the_email;
 
-    private boolean signed_in = false;
-    private boolean firebase_ready = false;
-    private boolean database_ready = false;
-
+    private boolean signed_in, firebase_ready, database_ready = false;
     private CountDownTimer firebase_timer;
 
     private Activity activityReference;
 
     private Map<String, String> the_map;
-
-    public  Firebase get_firebase() { return this; }
 
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
@@ -202,9 +191,9 @@ public class Firebase {
             public void onComplete(@NonNull Task<Void> task)
             {
                 if(task.isSuccessful())
-                {
-                    //password sucessfully changed
-                }
+                    Toast.makeText(activityReference.getApplicationContext(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(activityReference.getApplicationContext(), "Password not changed", Toast.LENGTH_SHORT).show();
             }
         });
     }

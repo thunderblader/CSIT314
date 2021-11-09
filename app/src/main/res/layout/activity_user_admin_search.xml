@@ -7,7 +7,7 @@
     tools:context=".useradminview.UserAdminSearchActivity">
 
     <EditText
-        android:id="@+id/AddSearchTextUID"
+        android:id="@+id/NewPasswordTextUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
@@ -20,16 +20,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewSearchUserID"
+        android:id="@+id/textViewChangepasswordUserID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:text="Enter UID"
-        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUID"
+        app:layout_constraintBottom_toTopOf="@+id/NewPasswordTextUID"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/SearchBackButton"
+        android:id="@+id/PasswordBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/SearchSearchButtonUID"
+        android:id="@+id/ChangepasswordButtonUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -121,7 +121,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-        android:id="@+id/SearchUpdateButton"
+        android:id="@+id/PasswordUpdateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="78dp"

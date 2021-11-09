@@ -22,6 +22,8 @@ public class theLoginActivity extends AppCompatActivity
     private String user_Email;
     private String user_Password;
 
+    public Firebase get_firebase() { return the_firebase; }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +34,8 @@ public class theLoginActivity extends AppCompatActivity
         final EditText the_Email = findViewById(R.id.username);
         final EditText the_Password = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.Login);
+
+        the_firebase.signout();
 
         loginButton.setOnClickListener(new View.OnClickListener()
         {
