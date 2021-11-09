@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,8 @@ public class theLoginActivity extends AppCompatActivity
 
     private String user_Email;
     private String user_Password;
+
+    private CountDownTimer login_timer;
 
     public Firebase get_firebase() { return the_firebase; }
 
@@ -73,28 +76,51 @@ public class theLoginActivity extends AppCompatActivity
                 }
                 else
                 {
-
-                    String user_Type_admin = "admin";
-                    //if(user_Type_admin == the_firebase.getThe_userType())
-                        launchUserAdminActivity(v);
-
-                    the_firebase.signIn(user_Email, user_Password);
-                    if(the_firebase.is_database_ready())
-                    {
-                        //launchPharmacyActivity(v);
-                        //launchPatientActivity(v);
-                    }
+                    the_firebase.signIn("theemail1234567@gmail.com", "123456");
+                    login_now();
                 }
             }
         });
     }
+    public void login_now()
+    {
+        login_timer = new CountDownTimer(100,100)
+        {
+            @Override
+            public void onTick(long l) { }
 
-    public void launchUserAdminActivity(View v) //launch to UserAdminActivity
+            @Override
+            public void onFinish()
+            {
+                if(the_firebase.is_database_ready())
+                {
+                    if(the_firebase.getThe_userType().equals("admin"))
+                        launchUserAdminActivity();
+                    else if(the_firebase.getThe_userType().equals("doctor"))
+                    {
+                        //launch doctor here
+                    }
+                    else if(the_firebase.getThe_userType().equals("patient"))
+                    {
+                        launchPatientActivity();
+                    }
+                    else
+                    {
+                        launchPharmacyActivity();
+                    }
+                }
+
+            }
+        };
+        login_timer.start();
+    }
+
+    public void launchUserAdminActivity() //launch to UserAdminActivity
     {
         Intent i = new Intent(this, UserAdminActivity.class);
         startActivity(i);
     }
-    public void launchPatientActivity(View v) //launch to PatientActivity
+    public void launchPatientActivity() //launch to PatientActivity
     {
         Intent i = new Intent(this, PrescriptionActivity.class);
         Map p = the_firebase.get_pastprescription2("theemail1@gmail.com");
@@ -134,7 +160,7 @@ public class theLoginActivity extends AppCompatActivity
         }
         return prescriptionAlist;
     }
-    public void launchPharmacyActivity(View v) //launch to PatientActivity
+    public void launchPharmacyActivity() //launch to PatientActivity
     {
         Intent i = new Intent(this, PharmacyViewPrescriptionActivity.class);
         ArrayList<Patient> patientAlist;

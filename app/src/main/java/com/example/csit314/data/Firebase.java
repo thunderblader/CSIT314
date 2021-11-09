@@ -53,10 +53,6 @@ public class Firebase {
     {
         return database_ready;
     }
-    public Firebase()
-    {
-
-    }
 
     public Firebase(Activity currentActivity)
     {
@@ -110,7 +106,6 @@ public class Firebase {
                         {
                             complete_signin(email);
                             setData(number, name, user_type);
-
                             fetch_database(mDatabase);
                         }
                         else
