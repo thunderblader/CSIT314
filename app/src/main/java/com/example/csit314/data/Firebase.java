@@ -61,6 +61,11 @@ public class Firebase {
     public String getThe_userType() { return the_userType; }
     public String getThe_userData(String user_email, String data_name) { return dataSnapshotReference.child("User_Group").child(user_email).child(data_name).getValue().toString(); }
 
+    public Firebase()
+    {
+
+    }
+
     public Firebase(Activity currentActivity)
     {
         activityReference = currentActivity;
