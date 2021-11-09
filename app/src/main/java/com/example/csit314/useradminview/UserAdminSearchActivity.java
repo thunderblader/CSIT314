@@ -1,35 +1,23 @@
 package com.example.csit314.useradminview;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
-import com.example.csit314.prescribe.Prescription;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class UserAdminSearchActivity extends AppCompatActivity {
 
-    private EditText SearchUID;
-    private EditText SearchUserGrp;
+    private EditText SearchEmail;
     private EditText TextName;
     private EditText TextNumber;
     private EditText TextUserGroup;
@@ -39,7 +27,7 @@ public class UserAdminSearchActivity extends AppCompatActivity {
     private Button backButton;
     private Button updateButton;
 
-    String UID_Name, UserGrp_Name;
+    String Email, UserGrp_Name;
     String txt_Name, txt_Number, txt_UserGroup;
 
     Firebase fb = new Firebase(UserAdminSearchActivity.this);
@@ -49,33 +37,42 @@ public class UserAdminSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_admin_search);
 
-        SearchUID = findViewById(R.id.AddSearchTextUID);
-        SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
+
+        //SearchEmail = findViewById(R.id.AddSearchTextUID);
+
+        //SearchUID = findViewById(R.id.NewPasswordTextUID);
+        //SearchUserGrp = findViewById(R.id.AddSearchTextUserGrp);
+
         TextName = findViewById(R.id.textViewUserAdminSearchName);
         TextNumber = findViewById(R.id.textViewUserAdminSearchNumber);
         TextUserGroup = findViewById(R.id.textViewUserAdminSearchUserGrp);
 
-        SearchSearchButtonUID = findViewById(R.id.SearchSearchButtonUID);
+        SearchSearchButtonUID = findViewById(R.id.ChangepasswordButtonUID);
         SearchSearchButtonUserGrp = findViewById(R.id.SearchSearchButtonUserGrp);
-        backButton = findViewById(R.id.SearchBackButton);
-        updateButton = findViewById(R.id.SearchUpdateButton);
+        backButton = findViewById(R.id.PasswordBackButton);
+        updateButton = findViewById(R.id.PasswordUpdateButton);
 
         fb.signIn("theemail1234567@gmail.com", "123456");
 
         SearchSearchButtonUID.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UID_Name = SearchUID.getText().toString();
+                Email = SearchEmail.getText().toString();
 
-                if(UID_Name.isEmpty()){
-                    SearchUID.setError("UID is required");
-                    SearchUID.requestFocus();
+                if(Email.isEmpty()){
+                    SearchEmail.setError("UID is required");
+                    SearchEmail.requestFocus();
+                    return;
+                }
+                if(fb.searchUser(Email) == null){
+                    SearchEmail.setError("user cannot be found");
+                    SearchEmail.requestFocus();
                     return;
                 }
 
-                txt_Name = fb.searchUser("theemail1234567@gmail.com").get("name");
-                txt_Number = fb.searchUser("theemail1234567@gmail.com").get("number");
-                txt_UserGroup = fb.searchUser("theemail1234567@gmail.com").get("user_type");
+                txt_Name = fb.searchUser(Email).get("name");
+                txt_Number = fb.searchUser(Email).get("number");
+                txt_UserGroup = fb.searchUser(Email).get("user_type");
 
                 UserAdminHelper uah = new UserAdminHelper();
                 uah.setName(txt_Name);
@@ -91,13 +88,6 @@ public class UserAdminSearchActivity extends AppCompatActivity {
         SearchSearchButtonUserGrp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserGrp_Name = SearchUserGrp.getText().toString();
-
-                if(UserGrp_Name.isEmpty()){
-                    SearchUID.setError("User Group is required");
-                    SearchUID.requestFocus();
-                    return;
-                }
 
                 startActivity(new Intent(UserAdminSearchActivity.this, UserAdminSearchList.class));
                 finish();
@@ -126,7 +116,7 @@ public class UserAdminSearchActivity extends AppCompatActivity {
                     TextUserGroup.requestFocus();
                     return;
                 }
-                fb.updateUser(UID_Name, txt_Number, txt_Name, txt_UserGroup);
+                fb.updateUser(Email, txt_Number, txt_Name, txt_UserGroup);
             }
         });
 

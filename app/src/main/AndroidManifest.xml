@@ -3,6 +3,8 @@
     package="com.example.csit314">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +24,20 @@
         <activity
             android:name=".useradminview.UserAdminActivity"
             android:exported="false" />
+        <activity
+            android:name=".pharmacyview.PharmacyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".pharmacyview.PharmacyViewPrescriptionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".pharmacyview.PharmacyUpdatePrescriptionActivity"
+            android:exported="true"
+            android:parentActivityName=".pharmacyview.PharmacyViewPrescriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".pharmacyview.PharmacyUpdatePrescriptionActivity" />
+        </activity>
         <activity
             android:name=".prescribe.PrescriptionActivity"
             android:exported="true"

@@ -33,34 +33,26 @@ public class Firebase {
 
     private FirebaseUser current_User;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private DatabaseReference user_ref;
-    private DatabaseReference update_ref;
-    private DataSnapshot dataSnapshot;
+    private DatabaseReference mDatabase, user_ref, update_ref;
     private DataSnapshot dataSnapshotReference;
 
-    private String the_name;
-    private String the_number;
-    private String the_userType;
-    private String the_email;
+    private String the_name, the_number, the_userType, the_email;
 
-    private boolean signed_in = false;
-    private boolean firebase_ready = false;
-    private boolean database_ready = false;
-
+    private boolean signed_in, firebase_ready, database_ready = false;
     private CountDownTimer firebase_timer;
 
     private Activity activityReference;
 
     private Map<String, String> the_map;
 
-    public  Firebase get_firebase() { return this; }
-
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
     public String getThe_userType() { return the_userType; }
     public String getThe_userData(String user_email, String data_name) { return dataSnapshotReference.child("User_Group").child(user_email).child(data_name).getValue().toString(); }
-
+    public Boolean is_database_ready()
+    {
+        return database_ready;
+    }
     public Firebase()
     {
 
@@ -153,9 +145,11 @@ public class Firebase {
 
     private void setData(String number, String name, String user_type)
     {
-        mDatabase.child(user_type).child(the_email).setValue(name);
-        mDatabase.child(user_type).child(the_email).setValue(number);
-        user_ref.child("prescription").setValue("null");
+        mDatabase.child(user_type).child(convert_email(the_email)).child("name").setValue(name);
+        mDatabase.child(user_type).child(convert_email(the_email)).child("number").setValue(number);
+        //mDatabase.child(user_type).child(the_email).setValue(name);
+        //mDatabase.child(user_type).child(the_email).setValue(number);
+       // user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
         user_ref.child("user_type").setValue(user_type);
@@ -207,9 +201,9 @@ public class Firebase {
             public void onComplete(@NonNull Task<Void> task)
             {
                 if(task.isSuccessful())
-                {
-                    //password sucessfully changed
-                }
+                    Toast.makeText(activityReference.getApplicationContext(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(activityReference.getApplicationContext(), "Password not changed", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -219,13 +213,20 @@ public class Firebase {
         Map<String, String> the_user = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).getValue();
         return the_user;
     }
-
+    public Map<String, Object> searchUserGroup()
+    {
+        Map<String, Object> the_user = (Map) dataSnapshotReference.child("User_Group").getValue();
+        return the_user;
+    }
     public void updateUser(String user_email, String number, String name, String user_type)
     {
         update_ref = mDatabase.child("User_Group").child(convert_email(user_email));
         update_ref.child("number").setValue(number);
         update_ref.child("name").setValue(name);
         update_ref.child("user_type").setValue(user_type);
+        update_ref = mDatabase.child(user_type).child(convert_email(user_email));
+        update_ref.child("number").setValue(number);
+        update_ref.child("name").setValue(name);
     }
 
     public Map<String, Object> searchUser_type(String user_type)
@@ -255,7 +256,9 @@ public class Firebase {
     public void add_prescription(String patient_email, String data) { mDatabase.child("User_Group").child(the_email).child("prescription").child(get_time()).setValue(data); }
 
     public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
-
+    public void edit_prescription2(String patient_email, String data, String prescriptionID) {
+        mDatabase.child("User_Group").child(convert_email(patient_email)).child("prescription").child(prescriptionID).child("status").setValue(data);
+    }
     private String convert_email(String email) { return email.replace('.', '_'); }
 
     public String get_time()

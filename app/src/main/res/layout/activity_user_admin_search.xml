@@ -7,29 +7,29 @@
     tools:context=".useradminview.UserAdminSearchActivity">
 
     <EditText
-        android:id="@+id/AddSearchTextUID"
+        android:id="@+id/NewPasswordTextUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="UID"
-        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUserGrp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSearchUserGrp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewSearchUserID"
+        android:id="@+id/textViewChangepasswordUserID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:text="Enter UID"
-        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUID"
+        app:layout_constraintBottom_toTopOf="@+id/NewPasswordTextUID"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/SearchBackButton"
+        android:id="@+id/PasswordBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/SearchSearchButtonUID"
+        android:id="@+id/ChangepasswordButtonUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -121,7 +121,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-        android:id="@+id/SearchUpdateButton"
+        android:id="@+id/PasswordUpdateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="78dp"
@@ -129,19 +129,6 @@
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/AddSearchTextUserGrp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="137dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="User Group"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchName"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/SearchSearchButtonUserGrp"
@@ -155,11 +142,13 @@
 
     <TextView
         android:id="@+id/textViewSearchUserGrp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="208dp"
+        android:layout_height="48dp"
         android:layout_marginStart="56dp"
-        android:text="Enter User Group"
-        app:layout_constraintBottom_toTopOf="@+id/AddSearchTextUserGrp"
+        android:layout_marginBottom="132dp"
+        android:autoSizeTextType="uniform"
+        android:text="Search User Group"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserAdminSearchName"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
