@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserAdminAddActivity extends AppCompatActivity {
 
-    Firebase firebase = new Firebase(UserAdminAddActivity.this);
+    Firebase fb = new Firebase(UserAdminAddActivity.this);
 
     private EditText TextName;
     private EditText TextEmail;
@@ -95,7 +95,7 @@ public class UserAdminAddActivity extends AppCompatActivity {
                     return;
                 }
                 else{
-                    firebase.createAccount(Name, Email, Password, Number, UserGroup);
+                    fb.createAccount(Email, Password, Name, Number, UserGroup);
                 }
             }
         });

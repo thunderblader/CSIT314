@@ -39,6 +39,9 @@ import com.example.csit314.patientview.Patient;
 import com.example.csit314.patientview.PatientActivity;
 import com.example.csit314.prescribe.Prescription;
 import com.example.csit314.prescribe.PrescriptionActivity;
+import com.example.csit314.ui.login.ChangePasswordActivity;
+import com.example.csit314.ui.login.theLoginActivity;
+import com.example.csit314.useradminview.UserAdminActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -80,7 +83,16 @@ public class PharmacyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void changePasswordOnClick(View view)
+    {
+        Intent i = new Intent( this, ChangePasswordActivity.class);
+        startActivity(i);
+    }
+    public void logoutOnClick(View view)
+    {
+        Intent i = new Intent( this, theLoginActivity.class);
+        startActivity(i);
+    }
 
 }
 

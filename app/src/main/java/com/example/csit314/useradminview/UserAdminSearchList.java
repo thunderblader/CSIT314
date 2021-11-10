@@ -1,31 +1,20 @@
 package com.example.csit314.useradminview;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
 
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
-import com.example.csit314.prescribe.Prescription;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class UserAdminSearchList extends AppCompatActivity {
@@ -33,7 +22,12 @@ public class UserAdminSearchList extends AppCompatActivity {
     private ArrayList<UserAdminHelper> alist;
     private RecyclerView recyclerView;
 
-    private Button button;
+    private Button Searchbutton;
+    private Button BackButton;
+
+    private EditText TextUserGroup;
+
+    private String search;
 
     Firebase fb = new Firebase(UserAdminSearchList.this);
 
@@ -43,24 +37,44 @@ public class UserAdminSearchList extends AppCompatActivity {
         setContentView(R.layout.activity_user_admin_search_list);
         fb.signIn("theemail1234567@gmail.com", "123456");
 
-        button = findViewById(R.id.button);
+        BackButton = findViewById(R.id.UserAdminSearchListBackButton);
+        Searchbutton = findViewById(R.id.UserAdminSearchListSearchButton);
+
+        TextUserGroup = findViewById(R.id.UserAdminSearchListSearchText);
+
         recyclerView = findViewById(R.id.UserAdminRecyclerView);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Searchbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alist = new ArrayList<>();
-                alist = collectUser(fb.searchUser_type("doctors"));
-                //String name = fb.searchUser2.get("name");
-                //String number = fb.searchUser2.get("number");
-                //String user_type = fb.searchUser2.get("user_type");
-                //alist.add(new UserAdminHelper(name, number, user_type));
+                search = TextUserGroup.getText().toString();
+
+                if(search.isEmpty()){
+                    TextUserGroup.setError("Cannot be empty");
+                    TextUserGroup.requestFocus();
+                    return;
+                }
+                if(fb.searchUser_type(search) == null){
+                    TextUserGroup.setError("user cannot be found");
+                    TextUserGroup.requestFocus();
+                    return;
+                }
+
+                alist = collectUser(fb.searchUser_type(search));
 
                 setAdapter();
             }
         });
 
-        //setUserInfo();
+        BackButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserAdminSearchList.this, UserAdminSearchActivity.class));
+                finish();
+            }
+        }));
+
     }
 
     private void setAdapter() {

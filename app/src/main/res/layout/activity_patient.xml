@@ -8,7 +8,29 @@
     android:onClick="emailOnClick">
 
     <Button
-        android:id="@+id/patientViewPastPrescriptionBtn"
+        android:id="@+id/PatientLogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="132dp"
+        android:onClick="logoutOnClick"
+        android:text="logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/PatientChangePasswordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="132dp"
+        android:onClick="changePasswordOnClick"
+        android:text="change password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/viewPastPrescriptionBtn"
         android:layout_width="141dp"
         android:layout_height="98dp"
         android:layout_marginStart="40dp"
@@ -19,12 +41,12 @@
         android:text="View Past Prescriptions"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/patientViewNewPrescriptionBtn"
+        app:layout_constraintEnd_toStartOf="@+id/viewNewPrescriptionBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/patientViewNewPrescriptionBtn"
+        android:id="@+id/viewNewPrescriptionBtn"
         android:layout_width="141dp"
         android:layout_height="98dp"
         android:layout_marginStart="24dp"
@@ -36,7 +58,7 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/patientViewPastPrescriptionBtn"
+        app:layout_constraintStart_toEndOf="@+id/viewPastPrescriptionBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageView

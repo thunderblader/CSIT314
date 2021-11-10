@@ -33,28 +33,15 @@ public class Firebase {
 
     private FirebaseUser current_User;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private DatabaseReference user_ref;
-    private DatabaseReference update_ref;
-    private DataSnapshot dataSnapshot;
+    private DatabaseReference mDatabase, user_ref, update_ref;
     private DataSnapshot dataSnapshotReference;
 
-    private String the_name;
-    private String the_number;
-    private String the_userType;
-    private String the_email;
+    private String the_name, the_number, the_userType, the_email;
 
-    private boolean signed_in = false;
-    private boolean firebase_ready = false;
-    private boolean database_ready = false;
-
+    private boolean signed_in, firebase_ready, database_ready = false;
     private CountDownTimer firebase_timer;
 
     private Activity activityReference;
-
-    private Map<String, String> the_map;
-
-    public  Firebase get_firebase() { return this; }
 
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
@@ -63,10 +50,6 @@ public class Firebase {
     public Boolean is_database_ready()
     {
         return database_ready;
-    }
-    public Firebase()
-    {
-
     }
 
     public Firebase(Activity currentActivity)
@@ -121,7 +104,6 @@ public class Firebase {
                         {
                             complete_signin(email);
                             setData(number, name, user_type);
-
                             fetch_database(mDatabase);
                         }
                         else
@@ -156,9 +138,9 @@ public class Firebase {
 
     private void setData(String number, String name, String user_type)
     {
-        mDatabase.child(user_type).child(the_email).setValue(name);
-        mDatabase.child(user_type).child(the_email).setValue(number);
-       // user_ref.child("prescription").setValue("null");
+        mDatabase.child(user_type).child(convert_email(the_email)).child("name").setValue(name);
+        mDatabase.child(user_type).child(convert_email(the_email)).child("number").setValue(number);
+        //user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
         user_ref.child("user_type").setValue(user_type);
@@ -172,7 +154,6 @@ public class Firebase {
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 dataSnapshotReference = dataSnapshot;
-                the_map = (Map) dataSnapshot.child("User_Group").child(convert_email(the_email)).getValue();
                 fetchData();
                 database_ready = true;
             }
@@ -210,9 +191,9 @@ public class Firebase {
             public void onComplete(@NonNull Task<Void> task)
             {
                 if(task.isSuccessful())
-                {
-                    //password sucessfully changed
-                }
+                    Toast.makeText(activityReference.getApplicationContext(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(activityReference.getApplicationContext(), "Password not changed", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -238,6 +219,9 @@ public class Firebase {
         update_ref.child("number").setValue(number);
         update_ref.child("name").setValue(name);
         update_ref.child("user_type").setValue(user_type);
+        update_ref = mDatabase.child(user_type).child(convert_email(user_email));
+        update_ref.child("number").setValue(number);
+        update_ref.child("name").setValue(name);
     }
 
     public Map<String, Object> searchUser_type(String user_type)

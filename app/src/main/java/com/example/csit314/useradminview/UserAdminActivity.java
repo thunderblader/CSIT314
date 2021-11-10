@@ -8,14 +8,17 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.csit314.R;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
+
+import com.example.csit314.ui.login.ChangePasswordActivity;
+import com.example.csit314.ui.login.theLoginActivity;
+
 
 public class UserAdminActivity extends AppCompatActivity {
 
     private Button addButton;
-    private Button registerButton;
     private Button searchButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,8 @@ public class UserAdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_admin);
 
         addButton = findViewById(R.id.UserAdminAddButton);
-        registerButton = findViewById(R.id.UserAdminRegisterButton);
         searchButton = findViewById(R.id.UserAdminSearchButton);
+
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -42,5 +45,16 @@ public class UserAdminActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void changePasswordOnClick(View view)
+    {
+        Intent i = new Intent( this, ChangePasswordActivity.class);
+        startActivity(i);
+    }
+
+    public void logoutOnClick(View view)
+    {
+        Intent i = new Intent( this, theLoginActivity.class);
+        startActivity(i);
     }
 }
