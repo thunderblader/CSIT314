@@ -43,8 +43,6 @@ public class Firebase {
 
     private Activity activityReference;
 
-    private Map<String, String> the_map;
-
     public String getThe_number() { return the_number; }
     public String getThe_name() { return the_name; }
     public String getThe_userType() { return the_userType; }
@@ -140,13 +138,9 @@ public class Firebase {
 
     private void setData(String number, String name, String user_type)
     {
-
         mDatabase.child(user_type).child(convert_email(the_email)).child("name").setValue(name);
         mDatabase.child(user_type).child(convert_email(the_email)).child("number").setValue(number);
-
-        //mDatabase.child(user_type).child(the_email).setValue(name);
-        //mDatabase.child(user_type).child(the_email).setValue(number);
-       // user_ref.child("prescription").setValue("null");
+        //user_ref.child("prescription").setValue("null");
         user_ref.child("number").setValue(number);
         user_ref.child("name").setValue(name);
         user_ref.child("user_type").setValue(user_type);
@@ -160,7 +154,6 @@ public class Firebase {
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 dataSnapshotReference = dataSnapshot;
-                the_map = (Map) dataSnapshot.child("User_Group").child(convert_email(the_email)).getValue();
                 fetchData();
                 database_ready = true;
             }

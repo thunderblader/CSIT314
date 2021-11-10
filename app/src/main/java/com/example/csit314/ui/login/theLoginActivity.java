@@ -101,13 +101,9 @@ public class theLoginActivity extends AppCompatActivity
                         //launch doctor here
                     }
                     else if(the_firebase.getThe_userType().equals("patient"))
-                    {
                         launchPatientActivity();
-                    }
                     else
-                    {
                         launchPharmacyActivity();
-                    }
                 }
 
             }

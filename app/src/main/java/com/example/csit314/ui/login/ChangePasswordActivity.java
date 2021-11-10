@@ -1,4 +1,4 @@
-package com.example.csit314.useradminview;
+package com.example.csit314.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,22 +9,23 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
+import com.example.csit314.useradminview.UserAdminActivity;
 
 
-public class UserAdminChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
 
     private Button backButton, updateButton;
     private EditText TextPassword;
 
     String NewPassword;
 
-    Firebase fb = new Firebase(UserAdminChangePasswordActivity.this);
+    Firebase fb = new Firebase(ChangePasswordActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_admin_changepassword);
+        setContentView(R.layout.activity_changepassword);
 
         TextPassword = findViewById(R.id.UserAdminSearchEmailText);
 
@@ -40,12 +41,12 @@ public class UserAdminChangePasswordActivity extends AppCompatActivity {
                 NewPassword = TextPassword.getText().toString();
                 if(NewPassword.isEmpty())
                 {
-                    Toast.makeText(UserAdminChangePasswordActivity.this, "Password Cannot Be Empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePasswordActivity.this, "Password Cannot Be Empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (NewPassword.length() < 6)
                 {
-                    Toast.makeText(UserAdminChangePasswordActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePasswordActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
                 }
                 fb.change_password(NewPassword);
             }
@@ -55,7 +56,7 @@ public class UserAdminChangePasswordActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserAdminChangePasswordActivity.this, UserAdminActivity.class));
+                startActivity(new Intent(ChangePasswordActivity.this, theLoginActivity.class));
                 finish();
             }
         }));
