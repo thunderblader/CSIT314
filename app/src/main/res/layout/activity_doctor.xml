@@ -6,6 +6,28 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/DoctorChangePasswordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="280dp"
+        android:onClick="changePasswordOnClick"
+        android:text="change password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/DoctorLogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginBottom="208dp"
+        android:onClick="logoutOnClick"
+        android:text="logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/doctorAddPrescriptionBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
