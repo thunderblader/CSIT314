@@ -17,8 +17,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private Button backButton, updateButton;
     private EditText TextPassword;
 
-    String NewPassword;
-
     Firebase fb = new Firebase(ChangePasswordActivity.this);
 
     @Override
@@ -38,17 +36,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                NewPassword = TextPassword.getText().toString();
-                if(NewPassword.isEmpty())
-                {
-                    Toast.makeText(ChangePasswordActivity.this, "Password Cannot Be Empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (NewPassword.length() < 6)
-                {
-                    Toast.makeText(ChangePasswordActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
-                }
-                fb.change_password(NewPassword);
+                if(check_password(TextPassword.getText().toString()))
+                    fb.change_password(TextPassword.getText().toString());
             }
         });
 
@@ -60,5 +49,20 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 finish();
             }
         }));
+    }
+
+    public Boolean check_password(String the_password)
+    {
+        if(the_password.isEmpty())
+        {
+            Toast.makeText(ChangePasswordActivity.this, "Password Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (the_password.length() < 6)
+        {
+            Toast.makeText(ChangePasswordActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

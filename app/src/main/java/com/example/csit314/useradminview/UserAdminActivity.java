@@ -9,17 +9,14 @@ import android.widget.Button;
 
 import com.example.csit314.R;
 
+import com.example.csit314.ui.login.ChangePasswordActivity;
 import com.example.csit314.ui.login.theLoginActivity;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 
 public class UserAdminActivity extends AppCompatActivity {
 
     private Button addButton;
     private Button searchButton;
-
-    private Button changePasswordButton;
 
 
 
@@ -31,7 +28,6 @@ public class UserAdminActivity extends AppCompatActivity {
         addButton = findViewById(R.id.UserAdminAddButton);
         searchButton = findViewById(R.id.UserAdminSearchButton);
 
-        changePasswordButton = findViewById(R.id.UserAdminChangePasswordButton);
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -49,5 +45,16 @@ public class UserAdminActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void changePasswordOnClick(View view)
+    {
+        Intent i = new Intent( this, ChangePasswordActivity.class);
+        startActivity(i);
+    }
+
+    public void logoutOnClick(View view)
+    {
+        Intent i = new Intent( this, theLoginActivity.class);
+        startActivity(i);
     }
 }
