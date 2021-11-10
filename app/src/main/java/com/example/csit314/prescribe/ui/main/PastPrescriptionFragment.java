@@ -96,7 +96,7 @@ public class PastPrescriptionFragment extends Fragment{
         allPrescriptionAList = getArguments().getParcelableArrayList("PrescriptionArrayList");
         for(Prescription p : allPrescriptionAList)
         {
-            if(p.getpStatus().equals("completed"))
+            if(p.getpStatus().toLowerCase().equals("completed"))
                 listPrescription.add(p);
 
         }

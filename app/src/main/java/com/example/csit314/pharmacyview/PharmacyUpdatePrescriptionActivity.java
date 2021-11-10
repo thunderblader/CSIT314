@@ -84,8 +84,8 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pharmacy_update_prescription);
-        tv_patient_name = (TextView) findViewById(R.id.patient_name_textview);
-        tv_patient_number = (TextView) findViewById(R.id.patient_number_textview);
+        tv_patient_name = (TextView) findViewById(R.id.patient_name_pharmacyTextView);
+        tv_patient_number = (TextView) findViewById(R.id.patient_number_pharmacyTextView);
         tv_patient_email = (TextView) findViewById(R.id.patient_email_textview);
         tv_prescription_name = (TextView) findViewById(R.id.prescription_name_textview);
         tv_prescription_date = (TextView) findViewById(R.id.prescription_date_textview);
@@ -136,15 +136,15 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
     private void sendEmail(){
         String mEmail = "khoowh1996@gmail.com";
         String mSubject = "Prescription Completed";
-        String mMessage = "Hi " + patient_name + "," ;
+        String mMessage = "Hi " + patient_name + "," + ",<br><br>Your Prescription has been collected.<br>To view your prescription kindly login to our app.";
         SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage);
         sendMail.execute();
     }
 
     private void updatePrescription() {
-        prescription_status = "completed";
+        prescription_status = "Completed";
         tv_prescription_status.setText(prescription_status);
-        the_firebase.edit_prescription2(patient_email,prescription_status,prescription_id);
+        the_firebase.edit_prescription(patient_email,prescription_status,prescription_id);
         Toast.makeText(getApplicationContext(),"Updated Prescription, Sending Email...",Toast.LENGTH_LONG).show();
     }
     protected void onStart()
@@ -195,7 +195,7 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
             name = (String) singleUser.get("name");
             email = entry.getKey().replace("_",".");
             number = (String) singleUser.get("number");
-            patientAlist.add(new Patient(name,number,email,collectPrescription(the_firebase.get_pastprescription2(email))));
+            patientAlist.add(new Patient(name,number,email,collectPrescription(the_firebase.get_pastprescriptionObject(email))));
         }
         return patientAlist;
     }

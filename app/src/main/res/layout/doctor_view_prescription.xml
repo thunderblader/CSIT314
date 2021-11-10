@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/doctor_view_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/search_border"
+        android:hint="  Search"
+        android:orientation="vertical"
+        android:selectAllOnFocus="true"
+        android:paddingLeft="8dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/doctor_view_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D9D7D4"
+        android:paddingTop="1dp"/>
+
+</LinearLayout>

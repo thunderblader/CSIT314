@@ -31,6 +31,31 @@
             android:name=".pharmacyview.PharmacyViewPrescriptionActivity"
             android:exported="true" />
         <activity
+            android:name=".doctorview.DoctorViewPrescriptionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".doctorview.DoctorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".doctorview.DoctorViewPatientActivity"
+            android:exported="true" />
+        <activity
+            android:name=".doctorview.DoctorAddPrescriptionActivity"
+            android:exported="true"
+            android:parentActivityName=".doctorview.DoctorViewPatientActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".doctorview.DoctorAddPrescriptionActivity" />
+        </activity>
+        <activity
+            android:name=".doctorview.DoctorUpdatePrescriptionActivity"
+            android:exported="true"
+            android:parentActivityName=".doctorview.DoctorActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".doctorview.DoctorUpdatePrescriptionActivity" />
+        </activity>
+        <activity
             android:name=".pharmacyview.PharmacyUpdatePrescriptionActivity"
             android:exported="true"
             android:parentActivityName=".pharmacyview.PharmacyViewPrescriptionActivity">

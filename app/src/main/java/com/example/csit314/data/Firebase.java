@@ -227,6 +227,11 @@ public class Firebase {
         Map<String, Object> the_user = (Map) dataSnapshotReference.child("User_Group").getValue();
         return the_user;
     }
+    public Map<String, String> get_medication()
+    {
+        Map<String, String> the_medication = (Map) dataSnapshotReference.child("medication").getValue();
+        return the_medication;
+    }
     public void updateUser(String user_email, String number, String name, String user_type)
     {
         update_ref = mDatabase.child("User_Group").child(convert_email(user_email));
@@ -253,20 +258,35 @@ public class Firebase {
         //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
         return my_prescription;
     }
-    public Map<String, Object> get_pastprescription2(String user_email)
+    public Map<String, Object> get_pastprescriptionObject(String user_email)
     {
         Map<String, Object> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("prescription").getValue();
         //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
         return my_prescription;
     }
-    public void add_prescription(String patient_email, String data) { mDatabase.child("User_Group").child(the_email).child("prescription").child(get_time()).setValue(data); }
-
-    public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
-    public void edit_prescription2(String patient_email, String data, String prescriptionID) {
+    public void add_prescription(String patient_email,String patient_name, String prescriptionName,String prescriptionDate,String prescriptionAmount,String prescriptionStatus) {
+        String userID = patient_name + get_prescriptionID();
+        String email = convert_email(patient_email);
+        mDatabase.child("User_Group").child(email).child("prescription").child(userID).child("name").setValue(prescriptionName);
+        mDatabase.child("User_Group").child(email).child("prescription").child(userID).child("date").setValue(prescriptionDate);
+        mDatabase.child("User_Group").child(email).child("prescription").child(userID).child("amount").setValue(prescriptionAmount);
+        mDatabase.child("User_Group").child(email).child("prescription").child(userID).child("status").setValue(prescriptionStatus);
+    }
+   // public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
+    public void edit_prescription(String patient_email, String data, String prescriptionID) {
         mDatabase.child("User_Group").child(convert_email(patient_email)).child("prescription").child(prescriptionID).child("status").setValue(data);
     }
+    public void edit_prescription(String patient_email, String prescriptionID,String prescriptionName,String prescriptionDate,String prescriptionAmount) {
+        mDatabase.child("User_Group").child(convert_email(patient_email)).child("prescription").child(prescriptionID).child("name").setValue(prescriptionName);
+        mDatabase.child("User_Group").child(convert_email(patient_email)).child("prescription").child(prescriptionID).child("date").setValue(prescriptionDate);
+        mDatabase.child("User_Group").child(convert_email(patient_email)).child("prescription").child(prescriptionID).child("amount").setValue(prescriptionAmount);
+    }
     private String convert_email(String email) { return email.replace('.', '_'); }
-
+    public String get_prescriptionID()
+    {
+        Long n = System.currentTimeMillis();
+        return String.valueOf(n);
+    }
     public String get_time()
     {
         SimpleDateFormat the_format = new SimpleDateFormat("dd-MM-yyyy");

@@ -82,10 +82,10 @@ public class NewPrescriptionFragment extends Fragment {
 
         listPrescription = new ArrayList<Prescription>();
         ArrayList<Prescription> allPrescriptionAList = new ArrayList<Prescription>();
-        allPrescriptionAList = getArguments().getParcelableArrayList("ArrayList");
+        allPrescriptionAList = getArguments().getParcelableArrayList("PrescriptionArrayList");
         for(Prescription p : allPrescriptionAList)
         {
-            if(p.getpStatus().equals("in progress") )
+            if(p.getpStatus().toLowerCase().equals("in progress") )
                 listPrescription.add(p);
         }
 

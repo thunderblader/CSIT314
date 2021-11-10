@@ -8,7 +8,7 @@
     android:onClick="emailOnClick">
 
     <Button
-        android:id="@+id/viewPastPrescriptionBtn"
+        android:id="@+id/patientViewPastPrescriptionBtn"
         android:layout_width="141dp"
         android:layout_height="98dp"
         android:layout_marginStart="40dp"
@@ -19,12 +19,12 @@
         android:text="View Past Prescriptions"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/viewNewPrescriptionBtn"
+        app:layout_constraintEnd_toStartOf="@+id/patientViewNewPrescriptionBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/viewNewPrescriptionBtn"
+        android:id="@+id/patientViewNewPrescriptionBtn"
         android:layout_width="141dp"
         android:layout_height="98dp"
         android:layout_marginStart="24dp"
@@ -36,7 +36,7 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/viewPastPrescriptionBtn"
+        app:layout_constraintStart_toEndOf="@+id/patientViewPastPrescriptionBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageView

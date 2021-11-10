@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.csit314.R;
 import com.example.csit314.data.Firebase;
 import com.example.csit314.databinding.ActivityLoginBinding;
+import com.example.csit314.doctorview.DoctorActivity;
 import com.example.csit314.patientview.Patient;
 import com.example.csit314.pharmacyview.PharmacyViewPrescriptionActivity;
 import com.example.csit314.prescribe.Prescription;
@@ -77,8 +78,9 @@ public class theLoginActivity extends AppCompatActivity
                     the_firebase.signIn(user_Email, user_Password);
                     if(the_firebase.is_database_ready())
                     {
-                        launchPharmacyActivity(v);
-                        //launchPatientActivity(v);
+                        //launchPharmacyActivity(v);
+                        //aunchPatientActivity(v);
+                        launchDoctorActivity(v);
                     }
                 }
             }
@@ -93,7 +95,7 @@ public class theLoginActivity extends AppCompatActivity
     public void launchPatientActivity(View v) //launch to PatientActivity
     {
         Intent i = new Intent(this, PrescriptionActivity.class);
-        Map p = the_firebase.get_pastprescription2("theemail1@gmail.com");
+        Map p = the_firebase.get_pastprescriptionObject(user_Email);
         ArrayList<Prescription> prescriptionAList = new ArrayList<>();
         if(p != null)
         {
@@ -101,6 +103,35 @@ public class theLoginActivity extends AppCompatActivity
         }
         //i.putExtra("PrescriptionArrayList", prescriptionAList);
         i.putParcelableArrayListExtra("PrescriptionArrayList", prescriptionAList);
+        startActivity(i);
+    }
+    public void launchDoctorActivity(View v) //launch to UserAdminActivity
+    {
+        Intent i = new Intent(this, DoctorActivity.class);
+        ArrayList<Patient> patientAlist;
+        Map p = the_firebase.searchUserGroup();
+        patientAlist = collectUserAndPrescription(p);
+        ArrayList<String> medAlist = new ArrayList<>();
+        medAlist = collectMedication();
+        i.putParcelableArrayListExtra("DoctorArrayList", patientAlist);
+        i.putStringArrayListExtra("medications",medAlist);
+        //i.putExtra("medications",medAlist);
+       // Bundle b = new Bundle();
+        //b.putStringArrayList("medications",medAlist);
+
+        i.putExtra("email",user_Email);
+        i.putExtra("password",user_Password);
+        startActivity(i);
+    }
+    public void launchPharmacyActivity(View v) //launch to PatientActivity
+    {
+        Intent i = new Intent(this, PharmacyViewPrescriptionActivity.class);
+        ArrayList<Patient> patientAlist;
+        Map p = the_firebase.searchUserGroup();
+        patientAlist = collectUserAndPrescription(p);
+        i.putParcelableArrayListExtra("PatientArrayList", patientAlist);
+        i.putExtra("email",user_Email);
+        i.putExtra("password",user_Password);
         startActivity(i);
     }
     public ArrayList<Prescription> collectPrescription(Map<String,Object> p)
@@ -130,18 +161,7 @@ public class theLoginActivity extends AppCompatActivity
         }
         return prescriptionAlist;
     }
-    public void launchPharmacyActivity(View v) //launch to PatientActivity
-    {
-        Intent i = new Intent(this, PharmacyViewPrescriptionActivity.class);
-        ArrayList<Patient> patientAlist;
-        Map p = the_firebase.searchUserGroup();
-        patientAlist = collectUserAndPrescription(p);
-        // i.putExtra("PatientArrayList",patientAlist);
-        i.putParcelableArrayListExtra("PatientArrayList", patientAlist);
-        i.putExtra("email",user_Email);
-        i.putExtra("password",user_Password);
-        startActivity(i);
-    }
+
     public ArrayList<Patient> collectUserAndPrescription(Map<String,Object> patient)
     {
         ArrayList<Patient> patientAlist = new ArrayList<>();
@@ -156,8 +176,21 @@ public class theLoginActivity extends AppCompatActivity
             name = (String) singleUser.get("name");
             email = entry.getKey().replace("_",".");
             number = (String) singleUser.get("number");
-            patientAlist.add(new Patient(name,number,email,collectPrescription(the_firebase.get_pastprescription2(email))));
+            patientAlist.add(new Patient(name,number,email,collectPrescription(the_firebase.get_pastprescriptionObject(email))));
         }
         return patientAlist;
+    }
+    public ArrayList<String> collectMedication()
+    {
+        Map<String,String> medication = the_firebase.get_medication();
+        ArrayList<String> medAlist = new ArrayList<>();
+
+        String name;
+        for (Map.Entry<String,String> entry: medication.entrySet())
+        {
+            medAlist.add(entry.getValue());
+        }
+
+        return medAlist;
     }
 }

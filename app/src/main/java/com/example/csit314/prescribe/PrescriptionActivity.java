@@ -67,7 +67,7 @@ public class PrescriptionActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ArrayList<Prescription> prescriptionList = new ArrayList<Prescription>();
-        prescriptionList = (ArrayList<Prescription>) getIntent().getSerializableExtra("ArrayList");
+        prescriptionList = (ArrayList<Prescription>) getIntent().getSerializableExtra("PrescriptionArrayList");
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(),prescriptionList);
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -77,12 +77,5 @@ public class PrescriptionActivity extends AppCompatActivity {
         int defaultValue = 0;
         int page = getIntent().getIntExtra("Two", defaultValue);
         viewPager.setCurrentItem(page);
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
     }
 }
