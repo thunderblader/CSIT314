@@ -46,6 +46,7 @@ public class theLoginActivity extends AppCompatActivity
         final EditText the_Password = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.Login);
         the_firebase.signout();
+        the_firebase.push_temp_medication();
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -74,8 +75,10 @@ public class theLoginActivity extends AppCompatActivity
                 }
                 else
                 {
-                    the_firebase.signIn("theemail1234567@gmail.com", "123456");
-                    login_now();
+                    //the_firebase.prepare_test_data();
+                    the_firebase.push_temp_medication();
+                    //the_firebase.signIn("theemail1234567@gmail.com", "123456");
+                    //login_now();
                 }
             }
         });
@@ -95,13 +98,11 @@ public class theLoginActivity extends AppCompatActivity
                     if(the_firebase.getThe_userType().equals("admin"))
                         launchUserAdminActivity();
                     else if(the_firebase.getThe_userType().equals("doctor"))
-                    {
-                        //launch doctor here
-                    }
-                    else if(the_firebase.getThe_userType().equals("patient"))
-                        launchPatientActivity();
-                    else
+                        launchUserDoctorActivity();
+                    else if(the_firebase.getThe_userType().equals("pharmacist"))
                         launchPharmacyActivity();
+                    else
+                        launchPatientActivity();
                 }
 
             }
@@ -112,6 +113,11 @@ public class theLoginActivity extends AppCompatActivity
     public void launchUserAdminActivity() //launch to UserAdminActivity
     {
         Intent i = new Intent(this, UserAdminActivity.class);
+        startActivity(i);
+    }
+    public void launchUserDoctorActivity() //launch to UserAdminActivity
+    {
+        Intent i = new Intent(this, DoctorActivity.class);
         startActivity(i);
     }
     public void launchPatientActivity() //launch to PatientActivity

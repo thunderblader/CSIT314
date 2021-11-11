@@ -102,9 +102,13 @@ public class Firebase {
                     {
                         if (task.isSuccessful())
                         {
+                            Toast.makeText(activityReference.getApplicationContext(), "Created", Toast.LENGTH_SHORT).show();
                             complete_signin(email);
                             setData(number, name, user_type);
-                            fetch_database(mDatabase);
+                            //fetch_database(mDatabase);
+
+                            //signout();
+
                         }
                         else
                         {
@@ -277,4 +281,41 @@ public class Firebase {
         String time_format = the_format.format(Calendar.getInstance().getTime());
         return time_format;
     }
+    //test code below do not touch
+    /*
+    //private int i = 0;
+    public void prepare_test_data()
+    {
+        testdata_timer();
+    }
+
+    private void testdata_timer()
+    {
+        firebase_timer = new CountDownTimer(10000,1000)
+        {
+            @Override
+            public void onTick(long l) { }
+
+            @Override
+            public void onFinish()
+            {
+
+
+
+            }
+        };
+        firebase_timer.start();
+    }
+    public void push_temp_medication()
+    {
+        createAccount("patient_99" + "@gmail.com", "123456", "john99", "12345678", "patient");
+        for (int i = 0; i < 10; i++)
+        {
+            //createAccount("patient_" + i + "@gmail.com", "123456", "john" + i, "12345678", "patient");
+            //createAccount("doctor" + i + "@gmail.com", "123456", "peter" + i, "12345678", "doctor");
+            //createAccount("pharmacist" + i + "@gmail.com", "123456", "wine" + i, "12345678", "pharmacist");
+            createAccount("admin" + i + "@gmail.com", "123456", "apple" + i, "12345678", "admin");
+            //add_prescription("patient_" + i + "@gmail.com", "john" + i, "for covid", get_time(), "1", "In Progress");
+        }
+    }*/
 }
