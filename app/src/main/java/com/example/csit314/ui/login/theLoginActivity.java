@@ -15,6 +15,7 @@ import com.example.csit314.data.Firebase;
 import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.doctorview.DoctorActivity;
 import com.example.csit314.patientview.Patient;
+import com.example.csit314.pharmacyview.PharmacyActivity;
 import com.example.csit314.pharmacyview.PharmacyViewPrescriptionActivity;
 import com.example.csit314.prescribe.Prescription;
 import com.example.csit314.prescribe.PrescriptionActivity;
@@ -150,9 +151,9 @@ public class theLoginActivity extends AppCompatActivity
         i.putExtra("password",user_Password);
         startActivity(i);
     }
-    public void launchPharmacyActivity() //launch to PatientActivity
+    public void launchPharmacyActivity() //launch to PharmacyActivity
     {
-        Intent i = new Intent(this, PharmacyViewPrescriptionActivity.class);
+        Intent i = new Intent(this, PharmacyActivity.class);
         ArrayList<Patient> patientAlist;
         Map p = the_firebase.searchUserGroup();
         patientAlist = collectUserAndPrescription(p);

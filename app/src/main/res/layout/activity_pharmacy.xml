@@ -6,28 +6,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="emailOnClick">
+    <TextView
+        android:id="@+id/view_pharmacy_email"
+        android:layout_width="62dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="174dp"
+        android:layout_marginEnd="175dp"
+        android:text="Email"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_pharmacy_number" />
 
+    <TextView
+        android:id="@+id/view_pharmacy_number"
+        android:layout_width="62dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="174dp"
+        android:layout_marginEnd="175dp"
+        android:text="Number"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_pharmacy_name" />
+    <TextView
+        android:id="@+id/view_pharmacy_name"
+        android:layout_width="70dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="171dp"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_pharmacy_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:id="@+id/PharmacyLogoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="160dp"
+        android:layout_width="141dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="212dp"
         android:onClick="logoutOnClick"
         android:text="logout"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/PharmacyChangePasswordButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="160dp"
+        android:layout_width="141dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="212dp"
         android:onClick="changePasswordOnClick"
         android:text="change password"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PharmacyLogoutButton" />
 
     <Button
         android:id="@+id/viewPrescriptionBtn"

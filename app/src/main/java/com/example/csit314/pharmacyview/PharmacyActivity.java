@@ -64,22 +64,31 @@ import androidmads.library.qrgenearator.QRGSaver;
 
 
 public class PharmacyActivity extends AppCompatActivity {
-
+    private String user_Email;
+    private String user_Password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacy);
+        user_Password =(String) getIntent().getStringExtra("password");
+        user_Email =(String) getIntent().getStringExtra("email");
     }
 
     public void onViewPrescriptionClick(View view) {
         Intent intent = new Intent(this,PharmacyViewPrescriptionActivity.class);
         ArrayList<Patient> PatientAlist = (ArrayList<Patient>) getIntent().getSerializableExtra("PatientArrayList");
         intent.putExtra("PatientArrayList",PatientAlist);
+        intent.putExtra("email",user_Email);
+        intent.putExtra("password",user_Password);
         startActivity(intent);
     }
 
     public void onUpdatePrescriptionClick(View view) {
         Intent intent = new Intent(this,PharmacyUpdatePrescriptionActivity.class);
+        ArrayList<Patient> PatientAlist = (ArrayList<Patient>) getIntent().getSerializableExtra("PatientArrayList");
+        intent.putExtra("PatientArrayList",PatientAlist);
+        intent.putExtra("email",user_Email);
+        intent.putExtra("password",user_Password);
         startActivity(intent);
     }
 
