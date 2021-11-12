@@ -198,7 +198,7 @@ public class theLoginActivity extends AppCompatActivity
                 Map singleUser = (Map) entry.getValue();
                 user_type = (String) singleUser.get("user_type");
                 name = (String) singleUser.get("name");
-                email = entry.getKey().replace("_", ".");
+                email = entry.getKey().replace("_com", ".com");
                 number = (String) singleUser.get("number");
                 if (user_type.toLowerCase().equals("patient"))
                     patientAlist.add(new Patient(name, number, email, collectPrescription(the_firebase.get_pastprescriptionObject(email))));

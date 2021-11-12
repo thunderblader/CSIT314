@@ -130,7 +130,7 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
-                String date = String.valueOf(day) + " " + String.valueOf(month) + " " + String.valueOf(year);
+                String date = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
                 et_prescription_date.setText(date);
             }
         };
@@ -152,15 +152,6 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
         finish();
         startActivity(intent);
     }
-
-    private void sendEmail(){
-        String mEmail = "khoowh1996@gmail.com";
-        String mSubject = "Prescription Updated";
-        String mMessage = "Hi " + patient_name + ",<br><br>Your Prescription has been Updated by our doctor.<br>To view your prescription kindly login to our app.";
-        SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage);
-        sendMail.execute();
-    }
-
     private void updatePrescription() {
         if(!et_prescription_date.getText().toString().equals(""))
             prescription_date = et_prescription_date.getText().toString();
@@ -176,7 +167,6 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
         else {
             the_firebase.edit_prescription(patient_email, prescription_id,prescription_name,prescription_date,prescription_amount);
             Toast.makeText(getApplicationContext(), "Updated Prescription, Sending Email...", Toast.LENGTH_LONG).show();
-            sendEmail();
             updateBtn.setEnabled(false);
             launchDoctorViewPrescriptionActivity();
         }
@@ -235,7 +225,7 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
                 Map singleUser = (Map) entry.getValue();
                 user_type = (String) singleUser.get("user_type");
                 name = (String) singleUser.get("name");
-                email = entry.getKey().replace("_", ".");
+                email = entry.getKey().replace("_com", ".com");
                 number = (String) singleUser.get("number");
                 if (user_type.toLowerCase().equals("patient"))
                     patientAlist.add(new Patient(name, number, email, collectPrescription(the_firebase.get_pastprescriptionObject(email))));
@@ -245,52 +235,7 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
             e.printStackTrace();
         }
         return patientAlist;
-    }/*
-    private String setMonth(int month)
-    {
-        String s = "";
-        switch(month)
-        {
-            case 1:
-                s = "January";
-                break;
-            case 2:
-                s = "February";
-                break;
-            case 3:
-                s = "March";
-                break;
-            case 4:
-                s = "April";
-                break;
-            case 5:
-                s = "May";
-                break;
-            case 6:
-                s = "June";
-                break;
-            case 7:
-                s = "July";
-                break;
-            case 8:
-                s = "August";
-                break;
-            case 9:
-                s = "September";
-                break;
-            case 10:
-                s = "October";
-                break;
-            case 11:
-                s = "November";
-                break;
-            case 12:
-                s = "December";
-                break;
-
-        }
-        return s;
-    }*/
+    }
     @Override
     public void onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);

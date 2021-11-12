@@ -118,7 +118,6 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
 
     public void updateOnClick(View view) {
         updatePrescription();
-        sendEmail();
         launchPharmacyViewPrescriptionActivity();
     }
     private void launchPharmacyViewPrescriptionActivity() {
@@ -131,14 +130,6 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
         intent.putExtra("password",user_password);
         finish();
         startActivity(intent);
-    }
-
-    private void sendEmail(){
-        String mEmail = "khoowh1996@gmail.com";
-        String mSubject = "Prescription Completed";
-        String mMessage = "Hi " + patient_name + "," + ",<br><br>Your Prescription has been collected.<br>To view your prescription kindly login to our app.";
-        SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage);
-        sendMail.execute();
     }
 
     private void updatePrescription() {
@@ -195,7 +186,7 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
                 Map singleUser = (Map) entry.getValue();
                 user_type = (String) singleUser.get("user_type");
                 name = (String) singleUser.get("name");
-                email = entry.getKey().replace("_", ".");
+                email = entry.getKey().replace("_com", ".com");
                 number = (String) singleUser.get("number");
                 if (user_type.toLowerCase().equals("patient"))
                     patientAlist.add(new Patient(name, number, email, collectPrescription(the_firebase.get_pastprescriptionObject(email))));

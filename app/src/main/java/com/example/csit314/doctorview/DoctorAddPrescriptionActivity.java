@@ -50,14 +50,16 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
     private TextView tv_patient_email;
     private EditText et_prescription_date;
     private EditText et_prescription_amount;
+    private EditText et_email_to;
+    private String emailto;
     private String patient_name;
     private String patient_number;
     private String patient_email;
     private String prescription_name;
     private String prescription_date;
     private String prescription_status;
-    private String prescription_amount = "0";
     private String prescription_id;
+    private String prescription_amount = "0";
     private String user_password;
     private String user_email;
     Firebase the_firebase = new Firebase(this);
@@ -73,7 +75,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         et_prescription_date = (EditText) findViewById(R.id.prescription_add_date_editText);
         et_prescription_amount = (EditText) findViewById(R.id.prescription_add_amount_editText);
         spinner_prescription_name = (Spinner) findViewById(R.id.prescription_add_spinner);
-
+        et_email_to = (EditText) findViewById(R.id.email_to_editText);
         //get Strings values
         patient_name = (String) getIntent().getStringExtra("patientname");
         patient_number = (String) getIntent().getStringExtra("patientnumber");
@@ -129,7 +131,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
-                String date = String.valueOf(day) + " " + String.valueOf(month) + " " + String.valueOf(year);
+                String date = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
                 et_prescription_date.setText(date);
             }
         };
@@ -152,7 +154,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         startActivity(intent);
     }
     public void sendEmail() {
-        String mEmail = "khoowh1996@gmail.com";
+        String mEmail = emailto;
         String mSubject = "Prescription Added";
         String mMessage = "Hi " + patient_name + ",<br><br>Your Prescription has been added by our doctor.<br>To view your prescription kindly login to our app." ;
 
@@ -198,18 +200,22 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
     }
     private void addPrescription() {
             prescription_status = "In Progress";
-        if(!et_prescription_date.getText().toString().equals(""))
-            prescription_date = et_prescription_date.getText().toString();
-
-        if(!et_prescription_amount.getText().toString().equals("") || !et_prescription_amount.getText().toString().equals("0"))
+        if(et_prescription_date.getText().toString().equals(""))
+            Toast.makeText(getApplicationContext(), "Date is Empty, Try again.", Toast.LENGTH_LONG).show();
+        if(et_prescription_amount.getText().toString().equals("") || !et_prescription_amount.getText().toString().equals("0"))
+            Toast.makeText(getApplicationContext(), "Amount is Empty, Try again.", Toast.LENGTH_LONG).show();
+        if(et_email_to.getText().toString().toLowerCase().equals(""))
+            Toast.makeText(getApplicationContext(), "Email is Empty, Try again.", Toast.LENGTH_LONG).show();
+        else {
+            emailto = et_email_to.getText().toString();
             prescription_amount = et_prescription_amount.getText().toString();
-
-
-            the_firebase.add_prescription(patient_email,patient_name,prescription_name,prescription_date,prescription_amount,prescription_status);
+            prescription_date = et_prescription_date.getText().toString();
+            the_firebase.add_prescription(patient_email, patient_name, prescription_name, prescription_date, prescription_amount, prescription_status);
             Toast.makeText(getApplicationContext(), "Added Prescription, Sending Email...", Toast.LENGTH_LONG).show();
             sendEmail();
             updateBtn.setEnabled(false);
             launchDoctorViewPatientActivity();
+        }
     }
     protected void onStart()
     {
@@ -265,7 +271,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
                 Map singleUser = (Map) entry.getValue();
                 user_type = (String) singleUser.get("user_type");
                 name = (String) singleUser.get("name");
-                email = entry.getKey().replace("_", ".");
+                email = entry.getKey().replace("_com", ".com");
                 number = (String) singleUser.get("number");
                 if (user_type.toLowerCase().equals("patient"))
                     patientAlist.add(new Patient(name, number, email, collectPrescription(the_firebase.get_pastprescriptionObject(email))));
@@ -276,51 +282,6 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         }
         return patientAlist;
     }
-   /* private String setMonth(int month)
-    {
-        String s = "";
-        switch(month)
-        {
-            case 1:
-                s = "January";
-                break;
-            case 2:
-                s = "February";
-                break;
-            case 3:
-                s = "March";
-                break;
-            case 4:
-                s = "April";
-                break;
-            case 5:
-                s = "May";
-                break;
-            case 6:
-                s = "June";
-                break;
-            case 7:
-                s = "July";
-                break;
-            case 8:
-                s = "August";
-                break;
-            case 9:
-                s = "September";
-                break;
-            case 10:
-                s = "October";
-                break;
-            case 11:
-                s = "November";
-                break;
-            case 12:
-                s = "December";
-                break;
-
-        }
-        return s;
-    }*/
     @Override
     public void onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);

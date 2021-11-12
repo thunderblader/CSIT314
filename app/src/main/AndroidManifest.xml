@@ -53,7 +53,7 @@
         <activity
             android:name=".doctorview.DoctorUpdatePrescriptionActivity"
             android:exported="true"
-            android:parentActivityName=".doctorview.DoctorActivity">
+            android:parentActivityName=".doctorview.DoctorViewPrescriptionActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".doctorview.DoctorUpdatePrescriptionActivity" />

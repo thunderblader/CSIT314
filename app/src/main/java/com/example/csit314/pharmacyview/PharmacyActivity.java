@@ -82,7 +82,7 @@ public class PharmacyActivity extends AppCompatActivity {
         intent.putExtra("password",user_Password);
         startActivity(intent);
     }
-
+/*
     public void onUpdatePrescriptionClick(View view) {
         Intent intent = new Intent(this,PharmacyUpdatePrescriptionActivity.class);
         ArrayList<Patient> PatientAlist = (ArrayList<Patient>) getIntent().getSerializableExtra("PatientArrayList");
@@ -90,7 +90,7 @@ public class PharmacyActivity extends AppCompatActivity {
         intent.putExtra("email",user_Email);
         intent.putExtra("password",user_Password);
         startActivity(intent);
-    }
+    }*/
 
     public void changePasswordOnClick(View view)
     {

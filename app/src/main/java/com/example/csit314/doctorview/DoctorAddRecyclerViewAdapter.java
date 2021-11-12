@@ -64,12 +64,11 @@ public class DoctorAddRecyclerViewAdapter extends RecyclerView.Adapter<DoctorAdd
                 String patient_email = "";
                 String patient_number = "";
                 intent = new Intent(parent.getContext(), DoctorAddPrescriptionActivity.class);
-                for(Patient p : patientData)
-                    {
-                            patient_name = p.getName();
-                            patient_email = p.getEmail();
-                            patient_number = p.getNumber();
-                    }
+
+                patient_name = patientData.get(vHolder.getAdapterPosition()).getName();
+                patient_email = patientData.get(vHolder.getAdapterPosition()).getEmail();
+                patient_number = patientData.get(vHolder.getAdapterPosition()).getNumber();
+
                 intent.putExtra("patientname",patient_name);
                 intent.putExtra("patientemail",patient_email);
                 intent.putExtra("patientnumber",patient_number);

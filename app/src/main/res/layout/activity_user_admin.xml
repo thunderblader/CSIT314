@@ -20,19 +20,19 @@
 
     <Button
         android:id="@+id/UserAdminSearchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="124dp"
+        android:layout_width="141dp"
+        android:layout_height="91dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="52dp"
         android:text="search"
         app:layout_constraintBottom_toTopOf="@+id/UserAdminChangePasswordButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/UserAdminChangePasswordButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
+        android:layout_width="141dp"
+        android:layout_height="91dp"
+        android:layout_marginEnd="36dp"
         android:layout_marginBottom="200dp"
         android:onClick="changePasswordOnClick"
         android:text="change password"
@@ -41,19 +41,19 @@
 
     <Button
         android:id="@+id/UserAdminAddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="61dp"
-        android:layout_marginBottom="377dp"
+        android:layout_width="141dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="344dp"
         android:text="add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/UserAdminLogoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
+        android:layout_width="141dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="44dp"
         android:layout_marginBottom="200dp"
         android:onClick="logoutOnClick"
         android:text="logout"
