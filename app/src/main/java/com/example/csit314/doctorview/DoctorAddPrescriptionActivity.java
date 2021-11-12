@@ -129,7 +129,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
-                String date = String.valueOf(day) + " " + setMonth(month) + " " + String.valueOf(year);
+                String date = String.valueOf(day) + " " + String.valueOf(month) + " " + String.valueOf(year);
                 et_prescription_date.setText(date);
             }
         };
@@ -276,7 +276,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         }
         return patientAlist;
     }
-    private String setMonth(int month)
+   /* private String setMonth(int month)
     {
         String s = "";
         switch(month)
@@ -320,7 +320,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
 
         }
         return s;
-    }
+    }*/
     @Override
     public void onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);

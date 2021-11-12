@@ -12,6 +12,7 @@
         android:layout_width="141dp"
         android:layout_height="98dp"
         android:layout_marginStart="49dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="236dp"
         android:onClick="changePasswordOnClick"
@@ -20,19 +21,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/PatientLogoutButton" />
+        app:layout_constraintStart_toEndOf="@+id/PatientLogoutButton"
+        app:layout_constraintTop_toBottomOf="@+id/viewNewPrescriptionBtn" />
 
     <Button
         android:id="@+id/PatientLogoutButton"
         android:layout_width="141dp"
         android:layout_height="98dp"
         android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="236dp"
         android:onClick="logoutOnClick"
         android:text="logout"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/PatientChangePasswordButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPastPrescriptionBtn"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/viewPastPrescriptionBtn"
@@ -41,11 +47,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="274dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="360dp"
+        android:layout_marginBottom="26dp"
         android:onClick="onPastPrescriptionClick"
         android:text="View Past Prescriptions"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/PatientLogoutButton"
         app:layout_constraintEnd_toStartOf="@+id/viewNewPrescriptionBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,11 +63,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="274dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="360dp"
+        android:layout_marginBottom="29dp"
         android:onClick="onNewPrescriptionClick"
         android:text="View New Prescriptions"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/PatientChangePasswordButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/viewPastPrescriptionBtn"
         app:layout_constraintTop_toTopOf="parent" />

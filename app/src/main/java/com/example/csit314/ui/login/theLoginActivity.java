@@ -76,6 +76,7 @@ public class theLoginActivity extends AppCompatActivity
                     //the_firebase.prepare_test_data();
                     //the_firebase.push_temp_medication();
                     //the_firebase.signIn("theemail1234567@gmail.com", "123456");
+                    the_firebase.signIn(user_Email,user_Password);
                     login_now();
                 }
             }
