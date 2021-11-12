@@ -46,7 +46,7 @@ public class theLoginActivity extends AppCompatActivity
         final EditText the_Password = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.Login);
         the_firebase.signout();
-        the_firebase.push_temp_medication();
+        //the_firebase.push_temp_medication();
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -76,9 +76,13 @@ public class theLoginActivity extends AppCompatActivity
                 else
                 {
                     //the_firebase.prepare_test_data();
-                    the_firebase.push_temp_medication();
-                    //the_firebase.signIn("theemail1234567@gmail.com", "123456");
+                    //the_firebase.push_temp_medication();
+                    the_firebase.signIn("theemail1234567@gmail.com", "123456");
                     //login_now();
+                    if(the_firebase.is_database_ready())
+                    {
+                        launchPatientActivity();
+                    }
                 }
             }
         });
@@ -122,18 +126,17 @@ public class theLoginActivity extends AppCompatActivity
     }
     public void launchPatientActivity() //launch to PatientActivity
     {
-        Intent i = new Intent(this, PrescriptionActivity.class);
-        Map p = the_firebase.get_pastprescriptionObject("theemail1@gmail.com");
+        Intent i = new Intent(this, PatientActivity.class);
+        Map p = the_firebase.get_pastprescriptionObject(user_Email);
         ArrayList<Prescription> prescriptionAList = new ArrayList<>();
         if(p != null)
         {
             prescriptionAList = collectPrescription(p);
         }
-        //i.putExtra("PrescriptionArrayList", prescriptionAList);
         i.putParcelableArrayListExtra("PrescriptionArrayList", prescriptionAList);
         startActivity(i);
     }
-    public void launchDoctorActivity(View v) //launch to UserAdminActivity
+    public void launchDoctorActivity() //launch to UserAdminActivity
     {
         Intent i = new Intent(this, DoctorActivity.class);
         ArrayList<Patient> patientAlist;
@@ -143,10 +146,6 @@ public class theLoginActivity extends AppCompatActivity
         medAlist = collectMedication();
         i.putParcelableArrayListExtra("DoctorArrayList", patientAlist);
         i.putStringArrayListExtra("medications",medAlist);
-        //i.putExtra("medications",medAlist);
-       // Bundle b = new Bundle();
-        //b.putStringArrayList("medications",medAlist);
-
         i.putExtra("email",user_Email);
         i.putExtra("password",user_Password);
         startActivity(i);

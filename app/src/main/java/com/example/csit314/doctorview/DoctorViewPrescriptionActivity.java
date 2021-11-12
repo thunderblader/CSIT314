@@ -78,19 +78,25 @@ public class DoctorViewPrescriptionActivity extends AppCompatActivity {
         ArrayList<Patient> filteredPatientList = new ArrayList<>();
 
         try {
-                for (Prescription pres : listPatientPrescription) {
-                    if (pres.getpName().toLowerCase().contains(text.toLowerCase())
+            for (Patient p : listPatient){
+                for (Prescription pres : p.getAlist()) {
+                    if (p.getName().toLowerCase().contains(text.toLowerCase())
+                            || p.getEmail().toLowerCase().contains(text.toLowerCase())
+                            || p.getNumber().toLowerCase().contains(text.toLowerCase())
+                            || pres.getpName().toLowerCase().contains(text.toLowerCase())
                             || pres.getpStatus().toLowerCase().contains(text.toLowerCase())
                             || pres.getpDate().toLowerCase().contains(text.toLowerCase())
                             || pres.getpAmount().toLowerCase().contains(text.toLowerCase())) {
                         filteredList.add(pres);
+                        filteredPatientList.add(p);
                     }
                 }
+            }
         }catch(Exception e)
         {
             e.printStackTrace();
         }
-        recyclerAdapter.filterList(filteredList);
+        recyclerAdapter.filterList(filteredList,filteredPatientList);
     }
     private void populate() {
         listPatientPrescription = new ArrayList<Prescription>();

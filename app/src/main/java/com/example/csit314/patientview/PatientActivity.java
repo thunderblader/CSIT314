@@ -13,6 +13,7 @@ import com.example.csit314.R;
 import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.email.SendMail;
 import com.example.csit314.patientview.PatientActivity;
+import com.example.csit314.prescribe.Prescription;
 import com.example.csit314.prescribe.PrescriptionActivity;
 import com.example.csit314.ui.login.ChangePasswordActivity;
 import com.example.csit314.ui.login.theLoginActivity;
@@ -31,21 +32,20 @@ import java.util.ArrayList;
 
 public class PatientActivity extends AppCompatActivity {
 
-    Bundle stringArrayList = getIntent().getExtras();
+    ArrayList<Prescription> prescriptionAList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
+        prescriptionAList = new ArrayList<>();
+        prescriptionAList = (ArrayList<Prescription>) getIntent().getSerializableExtra("PrescriptionArrayList");
     }
 
     public void onPastPrescriptionClick(View view) {
         int page = 2;
         Intent intent = new Intent(this,PrescriptionActivity.class);
         intent.putExtra("One", page);// One is your argument
-        ArrayList<String> key = stringArrayList.getStringArrayList("key");
-        ArrayList<String> value = stringArrayList.getStringArrayList("value");
-        intent.putStringArrayListExtra("key",key);
-        intent.putStringArrayListExtra("value",value);
+        intent.putParcelableArrayListExtra("PrescriptionArrayList", prescriptionAList);
         startActivity(intent);
     }
 
@@ -53,20 +53,8 @@ public class PatientActivity extends AppCompatActivity {
         int page = 2;
         Intent intent = new Intent(this,PrescriptionActivity.class);
         intent.putExtra("Two", page);// One is your argument
-        ArrayList<String> key = stringArrayList.getStringArrayList("key");
-        ArrayList<String> value = stringArrayList.getStringArrayList("value");
-        intent.putStringArrayListExtra("key",key);
-        intent.putStringArrayListExtra("value",value);
+        intent.putParcelableArrayListExtra("PrescriptionArrayList", prescriptionAList);
         startActivity(intent);
-    }
-
-    public void emailOnClick(View view) {
-        String mEmail = "khoowh1996@gmail.com";
-        String mSubject = "test new email dev314sim@";
-        String mMessage = "Test Message";
-
-        SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage);
-        sendMail.execute();
     }
     public void changePasswordOnClick(View view)
     {

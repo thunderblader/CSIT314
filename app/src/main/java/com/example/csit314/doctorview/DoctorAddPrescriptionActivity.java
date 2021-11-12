@@ -83,7 +83,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         tv_patient_name.setText( patient_name);
         tv_patient_number.setText(patient_number);
         tv_patient_email.setText(patient_email);
-        et_prescription_date.setText(prescription_date);
+        et_prescription_date.setHint("Date");
         et_prescription_amount.setHint("Amount : " + 0);
 
         //Set Password
@@ -198,6 +198,8 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
 
         if(!et_prescription_amount.getText().toString().equals("") || !et_prescription_amount.getText().toString().equals("0"))
             prescription_amount = et_prescription_amount.getText().toString();
+
+
             the_firebase.add_prescription(patient_email,patient_name,prescription_name,prescription_date,prescription_amount,prescription_status);
             Toast.makeText(getApplicationContext(), "Added Prescription, Sending Email...", Toast.LENGTH_LONG).show();
             sendEmail();

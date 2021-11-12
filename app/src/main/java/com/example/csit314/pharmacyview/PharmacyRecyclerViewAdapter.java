@@ -121,9 +121,10 @@ public class PharmacyRecyclerViewAdapter extends RecyclerView.Adapter<PharmacyRe
         return prescriptionData.size();
     }
 
-    public void filterList(ArrayList<Prescription> filteredList)
+    public void filterList(ArrayList<Prescription> filteredList,ArrayList<Patient> filteredPatientList)
     {
         prescriptionData = filteredList;
+        patientData = filteredPatientList;
         notifyDataSetChanged();
     }
 }
