@@ -25,6 +25,9 @@
             android:name=".useradminview.UserAdminActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.login.ChangePasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".pharmacyview.PharmacyActivity"
             android:exported="true" />
         <activity

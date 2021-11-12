@@ -13,12 +13,14 @@
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout-w1240dp/fragment2_layout.xml" value="0.19377510040160642" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout-w936dp/activity_login.xml" value="0.19808743169398907" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout-w936dp/doctor_view_list.xml" value="0.5" />
+        <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_changepassword.xml" value="0.33" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_doctor.xml" value="0.33" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_login.xml" value="0.26268115942028986" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_pastprescription.xml" value="0.25" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_patient.xml" value="0.5" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_pharmacy.xml" value="0.5" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_prescription.xml" value="0.33" />
+        <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_user_admin.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_user_admin_add.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_user_admin_search.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/khoow/OneDrive/Desktop/CSIT314/Android Project/CSIT314/app/src/main/res/layout/activity_user_admin_search_list_adapter.xml" value="0.22083333333333333" />
