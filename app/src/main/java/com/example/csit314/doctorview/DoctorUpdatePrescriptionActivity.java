@@ -156,7 +156,7 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
     private void sendEmail(){
         String mEmail = "khoowh1996@gmail.com";
         String mSubject = "Prescription Updated";
-        String mMessage = "Hi " + patient_name + "," + ",<br><br>Your Prescription has been Updated by our doctor.<br>To view your prescription kindly login to our app.";
+        String mMessage = "Hi " + patient_name + ",<br><br>Your Prescription has been Updated by our doctor.<br>To view your prescription kindly login to our app.";
         SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage);
         sendMail.execute();
     }

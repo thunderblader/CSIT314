@@ -94,7 +94,7 @@ public class PharmacyViewPrescriptionActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerAdapter = new PharmacyRecyclerViewAdapter(listPatientPrescription,listPatient,email,password);
         myrecyclerview.setLayoutManager(mLayoutManager);
-        EditText editText = findViewById(R.id.edittext);
+        EditText editText = findViewById(R.id.pharmacy_view_edittext);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

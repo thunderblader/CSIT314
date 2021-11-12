@@ -181,7 +181,7 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
         }
         return prescriptionAlist;
     }
-    public ArrayList<Patient> collectUserAndPrescription(Map<String,Object> patient)
+    public ArrayList<Patient> collectUserAndPrescription(Map<String,Object> patients)
     {
         ArrayList<Patient> patientAlist = new ArrayList<>();
 
@@ -189,7 +189,7 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
         String name;
         String email;
         String number;
-        for (Map.Entry<String, Object> entry: patient.entrySet())
+        for (Map.Entry<String, Object> entry: patients.entrySet())
         {
             Map singleUser = (Map) entry.getValue();
             name = (String) singleUser.get("name");

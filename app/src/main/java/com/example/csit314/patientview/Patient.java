@@ -8,7 +8,7 @@ import com.example.csit314.prescribe.Prescription;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Patient implements Parcelable, Serializable {
+public class Patient implements Parcelable {
     ArrayList<Prescription> pAlist;
     String name,number ,email;
     public Patient(){
