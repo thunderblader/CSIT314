@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -76,6 +77,10 @@ public class theLoginActivity extends AppCompatActivity
                 {
                     the_firebase.signIn("theemail1234567@gmail.com", "123456");
                     login_now();
+                   // if(the_firebase.is_database_ready())
+                   // {
+                   //     launchDoctorActivity();
+                   // }
                 }
             }
         });
@@ -96,7 +101,7 @@ public class theLoginActivity extends AppCompatActivity
                         launchUserAdminActivity();
                     else if(the_firebase.getThe_userType().equals("doctor"))
                     {
-                        //launch doctor here
+                        launchDoctorActivity();
                     }
                     else if(the_firebase.getThe_userType().equals("patient"))
                         launchPatientActivity();
@@ -117,7 +122,7 @@ public class theLoginActivity extends AppCompatActivity
     public void launchPatientActivity() //launch to PatientActivity
     {
         Intent i = new Intent(this, PrescriptionActivity.class);
-        Map p = the_firebase.get_pastprescriptionObject("theemail1@gmail.com");
+        Map p = the_firebase.get_pastprescriptionObject(user_Email);
         ArrayList<Prescription> prescriptionAList = new ArrayList<>();
         if(p != null)
         {
@@ -127,7 +132,7 @@ public class theLoginActivity extends AppCompatActivity
         i.putParcelableArrayListExtra("PrescriptionArrayList", prescriptionAList);
         startActivity(i);
     }
-    public void launchDoctorActivity(View v) //launch to UserAdminActivity
+    public void launchDoctorActivity() //launch to UserAdminActivity
     {
         Intent i = new Intent(this, DoctorActivity.class);
         ArrayList<Patient> patientAlist;
@@ -137,13 +142,21 @@ public class theLoginActivity extends AppCompatActivity
         medAlist = collectMedication();
         i.putParcelableArrayListExtra("DoctorArrayList", patientAlist);
         i.putStringArrayListExtra("medications",medAlist);
-        //i.putExtra("medications",medAlist);
-       // Bundle b = new Bundle();
-        //b.putStringArrayList("medications",medAlist);
-
         i.putExtra("email",user_Email);
         i.putExtra("password",user_Password);
+        display(patientAlist);
         startActivity(i);
+    }
+    public void display(ArrayList<Patient> p)
+    {
+        for(Patient pa : p)
+        {
+            for(Prescription pres : pa.getAlist())
+            {
+                Log.i("PRESCRIPTION DISPLAY ",pa.getName() + pa.getEmail() + pres.getpID());
+
+            }
+        }
     }
     public void launchPharmacyActivity() //launch to PatientActivity
     {

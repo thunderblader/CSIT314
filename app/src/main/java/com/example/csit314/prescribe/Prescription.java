@@ -58,7 +58,7 @@ public class Prescription implements Parcelable {
     public boolean equals(Prescription o) {
         if (o instanceof Prescription) {
             Prescription c = o;
-            return pName.equals(c.pName);
+            return pID.equals(c.pID);
         }
         else return false;
     }

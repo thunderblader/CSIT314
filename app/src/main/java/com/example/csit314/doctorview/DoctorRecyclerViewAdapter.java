@@ -129,4 +129,9 @@ public class DoctorRecyclerViewAdapter extends RecyclerView.Adapter<DoctorRecycl
         prescriptionData = filteredList;
         notifyDataSetChanged();
     }
+    public void filterPatientList(ArrayList<Patient> filteredList)
+    {
+        patientData = filteredList;
+        notifyDataSetChanged();
+    }
 }

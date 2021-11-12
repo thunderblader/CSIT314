@@ -72,13 +72,17 @@ public class DoctorViewPatientActivity extends AppCompatActivity {
     }
     private void filter(String text) {
         ArrayList<Patient> filteredList = new ArrayList<>();
-
-        for (Patient p : listPatient) {
-            if (p.getName().toLowerCase().contains(text.toLowerCase())
-                    || p.getNumber().toLowerCase().contains(text.toLowerCase())
-                    || p.getEmail().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(p);
+        try {
+            for (Patient p : listPatient) {
+                if (p.getName().toLowerCase().contains(text.toLowerCase())
+                        || p.getNumber().toLowerCase().contains(text.toLowerCase())
+                        || p.getEmail().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(p);
+                }
             }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
         }
         recyclerAdapter.filterList(filteredList);
     }

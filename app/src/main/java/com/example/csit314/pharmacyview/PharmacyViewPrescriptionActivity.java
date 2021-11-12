@@ -118,13 +118,17 @@ public class PharmacyViewPrescriptionActivity extends AppCompatActivity {
     }
     private void filter(String text) {
         ArrayList<Prescription> filteredList = new ArrayList<>();
-
         for (Prescription p : listPatientPrescription) {
-            if (p.getpName().toLowerCase().contains(text.toLowerCase())
-                    || p.getpStatus().toLowerCase().contains(text.toLowerCase())
-                    || p.getpDate().toLowerCase().contains(text.toLowerCase())
-                    || p.getpAmount().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(p);
+            try {
+
+                if (p.getpName().toLowerCase().contains(text.toLowerCase())
+                        || p.getpStatus().toLowerCase().contains(text.toLowerCase())
+                        || p.getpDate().toLowerCase().contains(text.toLowerCase())
+                        || p.getpAmount().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(p);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         recyclerAdapter.filterList(filteredList);

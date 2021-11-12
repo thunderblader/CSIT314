@@ -75,14 +75,18 @@ public class PastPrescriptionFragment extends Fragment{
     {
         ArrayList<Prescription> filteredList = new ArrayList<>();
 
-        for(Prescription p : listPrescription)
-        {
-            if(p.getpName().toLowerCase().contains(text.toLowerCase())
-                    || p.getpStatus().toLowerCase().contains(text.toLowerCase())
-                    || p.getpDate().toLowerCase().contains(text.toLowerCase())
-                    || p.getpAmount().toLowerCase().contains(text.toLowerCase()))
+        for (Prescription p : listPrescription) {
+            try {
+
+                if (p.getpName().toLowerCase().contains(text.toLowerCase())
+                        || p.getpStatus().toLowerCase().contains(text.toLowerCase())
+                        || p.getpDate().toLowerCase().contains(text.toLowerCase())
+                        || p.getpAmount().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(p);
+                }
+            }catch(Exception e)
             {
-                filteredList.add(p);
+                e.printStackTrace();
             }
         }
         recyclerAdapter.filterList(filteredList);

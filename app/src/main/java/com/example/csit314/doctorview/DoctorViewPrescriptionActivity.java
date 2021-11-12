@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -74,14 +75,20 @@ public class DoctorViewPrescriptionActivity extends AppCompatActivity {
     }
     private void filter(String text) {
         ArrayList<Prescription> filteredList = new ArrayList<>();
+        ArrayList<Patient> filteredPatientList = new ArrayList<>();
 
-        for (Prescription p : listPatientPrescription) {
-            if (p.getpName().toLowerCase().contains(text.toLowerCase())
-                    || p.getpStatus().toLowerCase().contains(text.toLowerCase())
-                    || p.getpDate().toLowerCase().contains(text.toLowerCase())
-                    || p.getpAmount().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(p);
-            }
+        try {
+                for (Prescription pres : listPatientPrescription) {
+                    if (pres.getpName().toLowerCase().contains(text.toLowerCase())
+                            || pres.getpStatus().toLowerCase().contains(text.toLowerCase())
+                            || pres.getpDate().toLowerCase().contains(text.toLowerCase())
+                            || pres.getpAmount().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(pres);
+                    }
+                }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
         }
         recyclerAdapter.filterList(filteredList);
     }
