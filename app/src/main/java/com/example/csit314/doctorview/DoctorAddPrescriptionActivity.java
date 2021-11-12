@@ -156,18 +156,23 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         String mSubject = "Prescription Added";
         String mMessage = "Hi " + patient_name + ",<br><br>Your Prescription has been added by our doctor.<br>To view your prescription kindly login to our app." ;
 
-        Bitmap bitmap;
-        QRGEncoder qrgEncoder;
-        qrgEncoder = new QRGEncoder(the_firebase.generateRandomstring(69), null, QRGContents.Type.TEXT,200);
-        qrgEncoder.setColorBlack(Color.BLACK);
-        qrgEncoder.setColorWhite(Color.WHITE);
-        bitmap = qrgEncoder.getBitmap();
+        Bitmap bitmap = generateQR();
 
         String url = saveImageToExternalStorage(bitmap);
         scanMedia(url);
         SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage,url);
         sendMail.execute();
         Toast.makeText(getApplicationContext(), "Sending Mail", Toast.LENGTH_LONG).show();
+    }
+    public Bitmap generateQR()
+    {
+        Bitmap bitmap;
+        QRGEncoder qrgEncoder;
+        qrgEncoder = new QRGEncoder(the_firebase.generateRandomstring(69), null, QRGContents.Type.TEXT,200);
+        qrgEncoder.setColorBlack(Color.BLACK);
+        qrgEncoder.setColorWhite(Color.WHITE);
+        bitmap = qrgEncoder.getBitmap();
+        return bitmap;
     }
 
     public static String saveImageToExternalStorage(Bitmap finalBitmap) {
@@ -254,13 +259,20 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         String name;
         String email;
         String number;
-        for (Map.Entry<String, Object> entry: patient.entrySet())
+        String user_type;
+        try {
+            for (Map.Entry<String, Object> entry : patient.entrySet()) {
+                Map singleUser = (Map) entry.getValue();
+                user_type = (String) singleUser.get("user_type");
+                name = (String) singleUser.get("name");
+                email = entry.getKey().replace("_", ".");
+                number = (String) singleUser.get("number");
+                if (user_type.toLowerCase().equals("patient"))
+                    patientAlist.add(new Patient(name, number, email, collectPrescription(the_firebase.get_pastprescriptionObject(email))));
+            }
+        }catch(Exception e)
         {
-            Map singleUser = (Map) entry.getValue();
-            name = (String) singleUser.get("name");
-            email = entry.getKey().replace("_",".");
-            number = (String) singleUser.get("number");
-            patientAlist.add(new Patient(name,number,email,collectPrescription(the_firebase.get_pastprescriptionObject(email))));
+            e.printStackTrace();
         }
         return patientAlist;
     }

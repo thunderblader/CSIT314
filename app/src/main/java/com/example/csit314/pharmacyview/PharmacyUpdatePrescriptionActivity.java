@@ -189,13 +189,20 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
         String name;
         String email;
         String number;
-        for (Map.Entry<String, Object> entry: patients.entrySet())
+        String user_type;
+        try {
+            for (Map.Entry<String, Object> entry : patients.entrySet()) {
+                Map singleUser = (Map) entry.getValue();
+                user_type = (String) singleUser.get("user_type");
+                name = (String) singleUser.get("name");
+                email = entry.getKey().replace("_", ".");
+                number = (String) singleUser.get("number");
+                if (user_type.toLowerCase().equals("patient"))
+                    patientAlist.add(new Patient(name, number, email, collectPrescription(the_firebase.get_pastprescriptionObject(email))));
+            }
+        }catch(Exception e)
         {
-            Map singleUser = (Map) entry.getValue();
-            name = (String) singleUser.get("name");
-            email = entry.getKey().replace("_",".");
-            number = (String) singleUser.get("number");
-            patientAlist.add(new Patient(name,number,email,collectPrescription(the_firebase.get_pastprescriptionObject(email))));
+            e.printStackTrace();
         }
         return patientAlist;
     }
