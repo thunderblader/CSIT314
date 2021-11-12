@@ -16,12 +16,9 @@ import com.example.csit314.databinding.ActivityLoginBinding;
 import com.example.csit314.doctorview.DoctorActivity;
 import com.example.csit314.patientview.Patient;
 import com.example.csit314.pharmacyview.PharmacyActivity;
-import com.example.csit314.pharmacyview.PharmacyViewPrescriptionActivity;
 import com.example.csit314.prescribe.Prescription;
-import com.example.csit314.prescribe.PrescriptionActivity;
 import com.example.csit314.patientview.PatientActivity;
 import com.example.csit314.useradminview.UserAdminActivity;
-import com.example.csit314.doctorview.DoctorActivity;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -78,12 +75,8 @@ public class theLoginActivity extends AppCompatActivity
                 {
                     //the_firebase.prepare_test_data();
                     //the_firebase.push_temp_medication();
-                    the_firebase.signIn("theemail1234567@gmail.com", "123456");
-                    //login_now();
-                    if(the_firebase.is_database_ready())
-                    {
-                        launchPatientActivity();
-                    }
+                    //the_firebase.signIn("theemail1234567@gmail.com", "123456");
+                    login_now();
                 }
             }
         });
@@ -103,7 +96,7 @@ public class theLoginActivity extends AppCompatActivity
                     if(the_firebase.getThe_userType().equals("admin"))
                         launchUserAdminActivity();
                     else if(the_firebase.getThe_userType().equals("doctor"))
-                        launchUserDoctorActivity();
+                        launchDoctorActivity();
                     else if(the_firebase.getThe_userType().equals("pharmacist"))
                         launchPharmacyActivity();
                     else
@@ -137,7 +130,7 @@ public class theLoginActivity extends AppCompatActivity
         i.putParcelableArrayListExtra("PrescriptionArrayList", prescriptionAList);
         startActivity(i);
     }
-    public void launchDoctorActivity() //launch to UserAdminActivity
+    public void launchDoctorActivity() //launch to DoctorActivity
     {
         Intent i = new Intent(this, DoctorActivity.class);
         ArrayList<Patient> patientAlist;
