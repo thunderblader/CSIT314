@@ -77,7 +77,6 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
             mimeMessage.setFrom(new InternetAddress(EMAIL));
             mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(email)));
             mimeMessage.setSubject(subject);
-            mimeMessage.setContent(message,"text/html");
             if(url != "")
             {
                 File file = new File(url);
@@ -96,7 +95,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
 
                 // create bodypart with html content and reference to the content-id
                 messageBodyPart = new MimeBodyPart();
-                String htmlText = "<img src=\"cid:vogue\">";
+                String htmlText = message + "<br><br><img src=\"cid:vogue\">";
                 messageBodyPart.setContent(htmlText, "text/html");
                 multipart.addBodyPart(messageBodyPart);
 

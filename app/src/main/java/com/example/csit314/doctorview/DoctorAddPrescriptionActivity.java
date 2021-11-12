@@ -156,7 +156,8 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
     public void sendEmail() {
         String mEmail = emailto;
         String mSubject = "Prescription Added";
-        String mMessage = "Hi " + patient_name + ",<br><br>Your Prescription has been added by our doctor.<br>To view your prescription kindly login to our app." ;
+        String mMessage = "Hi " + patient_name + ",<br><br>Your Prescription has been added by our doctor." +
+                "<br>To view the prescription kindly login to our app.<br> Kindly go to the located pharmacy to scan the QR Code, to recieve your prescription." ;
 
         Bitmap bitmap = generateQR();
 
