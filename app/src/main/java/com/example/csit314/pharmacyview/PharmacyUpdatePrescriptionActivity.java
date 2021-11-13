@@ -136,7 +136,7 @@ public class PharmacyUpdatePrescriptionActivity extends AppCompatActivity {
         prescription_status = "Completed";
         tv_prescription_status.setText(prescription_status);
         the_firebase.edit_prescription(patient_email,prescription_status,prescription_id);
-        Toast.makeText(getApplicationContext(),"Updated Prescription, Sending Email...",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Updated Prescription...",Toast.LENGTH_LONG).show();
     }
     protected void onStart()
     {

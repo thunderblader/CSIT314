@@ -166,7 +166,7 @@ public class DoctorUpdatePrescriptionActivity extends AppCompatActivity implemen
             Toast.makeText(getApplicationContext(),"Field(s) is empty, Please try again.",Toast.LENGTH_LONG).show();
         else {
             the_firebase.edit_prescription(patient_email, prescription_id,prescription_name,prescription_date,prescription_amount);
-            Toast.makeText(getApplicationContext(), "Updated Prescription, Sending Email...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Updated Prescription...", Toast.LENGTH_LONG).show();
             updateBtn.setEnabled(false);
             launchDoctorViewPrescriptionActivity();
         }

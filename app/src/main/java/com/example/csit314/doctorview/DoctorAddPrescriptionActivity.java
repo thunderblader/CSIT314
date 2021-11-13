@@ -165,7 +165,7 @@ public class DoctorAddPrescriptionActivity extends AppCompatActivity implements 
         scanMedia(url);
         SendMail sendMail = new SendMail(this,mEmail,mSubject,mMessage,url);
         sendMail.execute();
-        Toast.makeText(getApplicationContext(), "Sending Mail", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Sending Mail", Toast.LENGTH_LONG).show();
     }
     public Bitmap generateQR()
     {
