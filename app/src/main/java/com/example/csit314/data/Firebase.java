@@ -234,7 +234,7 @@ public class Firebase {
         return the_usertype;
     }
 
-    public Map<String, String> get_prescription(String the_prescription)
+    /*public Map<String, String> get_prescription(String the_prescription)
     {
         Map<String, String> prescription = (Map) dataSnapshotReference.child("medication").child(the_prescription).getValue();
         return prescription;
@@ -245,7 +245,7 @@ public class Firebase {
         Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("prescription").getValue();
         //Map<String, String> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(the_email).getValue();
         return my_prescription;
-    }
+    }*/
     public Map<String, Object> get_pastprescriptionObject(String user_email)
     {
         Map<String, Object> my_prescription = (Map) dataSnapshotReference.child("User_Group").child(convert_email(user_email)).child("prescription").getValue();
@@ -260,7 +260,6 @@ public class Firebase {
         mDatabase.child("User_Group").child(email).child("prescription").child(userID).child("amount").setValue(prescriptionAmount);
         mDatabase.child("User_Group").child(email).child("prescription").child(userID).child("status").setValue(prescriptionStatus);
     }
-   // public void edit_prescription(String patient_email, String data, String the_time) { mDatabase.child("User_Group").child(the_email).child("prescription").child(the_time).setValue(data); }
     public void edit_prescription(String patient_email, String data, String prescriptionID) {
         mDatabase.child("User_Group").child(convert_email(patient_email)).child("prescription").child(prescriptionID).child("status").setValue(data);
     }
