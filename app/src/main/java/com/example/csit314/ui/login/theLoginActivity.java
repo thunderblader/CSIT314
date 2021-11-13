@@ -28,11 +28,9 @@ public class theLoginActivity extends AppCompatActivity
     private ActivityLoginBinding theLogin;
     Firebase the_firebase = new Firebase(this);
 
-    private String user_Email;
-    private String user_Password;
+    private String user_Email, user_Password;
     private CountDownTimer login_timer;
 
-    public Firebase get_firebase() { return the_firebase; }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -112,11 +110,6 @@ public class theLoginActivity extends AppCompatActivity
     public void launchUserAdminActivity() //launch to UserAdminActivity
     {
         Intent i = new Intent(this, UserAdminActivity.class);
-        startActivity(i);
-    }
-    public void launchUserDoctorActivity() //launch to UserAdminActivity
-    {
-        Intent i = new Intent(this, DoctorActivity.class);
         startActivity(i);
     }
     public void launchPatientActivity() //launch to PatientActivity
